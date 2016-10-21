@@ -52,7 +52,7 @@ class Database {
      * @param  [string] $sql [sql query]
      * @return [array]      [trả về mảng dữ liệu]
      */
-    public function sql($sql) {
+    public function query($sql) {
 
         $result = $this->conn->query($sql);
         $data = array();
