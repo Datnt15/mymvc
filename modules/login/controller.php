@@ -10,9 +10,13 @@ class Login extends Controller
 		parent::__construct(__CLASS__);
 	}
 
-	function index(){
+	public function index(){
 		$this->load_view('index');
 		$this->load_model();
+	}
+
+	public function check_login(){
+		echo "check login";
 	}
 	
 }
