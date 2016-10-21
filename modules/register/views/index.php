@@ -27,7 +27,7 @@
 	            <div class="wrap">
 	                <p class="form-title">
 	                    Register</p>
-	                <form class="login" id="login-form" method="POST" action="<?= base_url . 'login/check_login' ?>" >
+	                <form class="login" id="register-form" method="POST" action="<?= base_url . 'register/register' ?>" >
 	                	<div class="form-group">
 			                <i class="fa fa-lg fa-user" aria-hidden="true"></i>
 			                <input type="text" name="username" id="username" placeholder="Username or Email" pattern="[A-Za-z_0-9-]{3,15}[^'\x22\s@!]+" title="Chỉ chứa số, chữ hoa, chữ thường, gạch dưới '_', gạch nối '-' dài tối thiểu 3 đến 15 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
@@ -41,7 +41,7 @@
 	                		<i class="fa fa-lg fa-envelope-o" aria-hidden="true"></i>
 		                	<input type="email" name="email" id="email" placeholder="example@gmail.com" required />
 		                </div>
-		                <input type="submit" value="Register" id="login-btn" class="btn btn-danger btn-lg" />
+		                <input type="submit" value="Register" id="register-btn" class="btn btn-danger btn-lg" />
 
 		                <div class="row">
                             <div class="col-md-6 col-xs-6 col-sm-6">

@@ -8,7 +8,7 @@ class Login extends Controller
 	function __construct()
 	{
 		parent::__construct(__CLASS__);
-		$user = $this->load_model('user');
+		$this->user = $this->load_model('user');
 	}
 
 	public function index(){
@@ -16,6 +16,7 @@ class Login extends Controller
 	}
 
 	public function check_login(){
+		var_dump($users);
 		echo "check login";
 	}
 	
