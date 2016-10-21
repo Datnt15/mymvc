@@ -44,8 +44,24 @@ class Register extends Controller
                 return false;
             }
 
-            $data['secret_code'] = md5(uniqid($data['username'], true));
+            if ($this->user->is_username_exist($data['username'])) {
+                echo json_encode(array(
+                		'stt' => 'faild',
+            			'message' => 'Username is already exist!'
+                	));
+                return false;
+            }
 
+            if ($this->user->is_email_exist($data['email'])) {
+                echo json_encode(array(
+                		'stt' => 'faild',
+            			'message' => 'Email is already exist!'
+                	));
+                return false;
+            }
+
+            $data['secret_code'] = md5(uniqid($data['username'], true));
+            $data['password'] = md5($data['password']);
             $user = $this->user->add_new_user($data);
             // thêm thành công
             if ( $user ) {
@@ -58,9 +74,10 @@ class Register extends Controller
             // Thất bại tràn trề
             else {
             	echo json_encode( array(
-	            		'stt' => 'success',
-            			'message' => $data['secret_code']
+	            		'stt' => 'faild',
+            			'message' => 'Some errors occured!'
             		) );
+            	return false;
             }
     	}
 	}

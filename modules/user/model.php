@@ -67,7 +67,7 @@ class User_model extends Model
      * @param [array] $data [mảng dữ liệu để thêm vào db]
      */
     public function add_new_user($data){
-    	return $this->db->add_row($this->table, $data);
+    	return $this->db->add_row($data, $this->table);
     }
 
 
@@ -105,8 +105,8 @@ class User_model extends Model
 	 * @param  [int] $uid [User ID]
 	 * @return [array]      [mảng dữ liệu trả về]
 	 */
-	public function get_user($uid){
-		return $this->db->get_row($this->table, array('uid' => $uid) );
+	public function get_user($where){
+		return $this->db->get_row($this->table, $where);
 	}
 
 

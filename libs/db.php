@@ -81,7 +81,7 @@ class Database {
         $key = array_keys($data);
 
         $sql = "INSERT INTO `" . $table . "`(" . "`" . implode("`,`",$key) . "`" . ") VALUES (" . "\"" . implode("\",\"",$data) . "\"" . ");";
-
+        
         if ( $this->conn->query($sql) )
             // Trả về ID bản ghi mới thêm
             return intval($this->conn->insert_id);

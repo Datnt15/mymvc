@@ -23,7 +23,7 @@ class Bootstrap {
 		$url = explode("/", rtrim($url,'/'));
 
 		$file_name = "modules/".strtolower($url[0])."/controller.php";
-
+		$controller = '';
 		if(file_exists($file_name)) {
 			//neu file ton tai
 			require $file_name;
@@ -37,11 +37,13 @@ class Bootstrap {
 
 		if ( isset($url[1]) && $url[1] !== ''  ) {
 			if ( !method_exists($controller, $url[1]) ){
+				// Khong ton tai method
 				require 'modules/f404/controller.php';
 				$controller = new File_not_exist();
 				$controller->index();
 				die;
 			} elseif( isset($url[2]) ) {
+				// method co tham so truyen vao
 				$controller->{$url[1]}($url[2]);
 			} else {
 				$controller->{$url[1]}();
