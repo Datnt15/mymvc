@@ -2,8 +2,10 @@
 <html lang="vi">
 <head>
 	<meta charset="UTF-8">
-	<title>Login</title>
+	<title>Register</title>
 	<base href="<?php echo base_url; ?>">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="profile" href="http://gmpg.org/xfn/11">
 	<!-- <link rel="icon" href="favicon.ico" type="image/gif">
 	<link rel="icon" href="favicon.ico" type="image/x-icon" /> -->
 	<link rel="stylesheet" href="<?= base_url; ?>assets/css/animate.min.css">
@@ -24,7 +26,7 @@
 	        <div class="col-md-12">
 	            <div class="wrap">
 	                <p class="form-title">
-	                    Login</p>
+	                    Register</p>
 	                <form class="login" id="login-form" method="POST" action="<?= base_url . 'login/check_login' ?>" >
 	                	<div class="form-group">
 			                <i class="fa fa-lg fa-user" aria-hidden="true"></i>
@@ -35,7 +37,11 @@
 	                		<i class="fa fa-lg fa-lock" aria-hidden="true"></i>
 		                	<input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}[^'\x22\s@!]+" title="Chứa ít nhât một số, chữ hoa, chữ thường và dài tối thiểu 4 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
 		                </div>
-		                <input type="submit" value="Login" id="login-btn" class="btn btn-danger btn-lg" />
+		                <div class="form-group">
+	                		<i class="fa fa-lg fa-envelope-o" aria-hidden="true"></i>
+		                	<input type="email" name="email" id="email" placeholder="example@gmail.com" required />
+		                </div>
+		                <input type="submit" value="Register" id="login-btn" class="btn btn-danger btn-lg" />
 
 		                <div class="row">
                             <div class="col-md-6 col-xs-6 col-sm-6">

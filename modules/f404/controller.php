@@ -8,6 +8,8 @@ class File_not_exist extends Controller
 	function __construct()
 	{
 		parent::__construct();
-		echo "File does not exist!";
+	}
+	public function index(){
+		echo "Page not found";
 	}
 }

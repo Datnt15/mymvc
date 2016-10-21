@@ -28,17 +28,6 @@ class Bootstrap {
 			//neu file ton tai
 			require $file_name;
 			$controller = new $url[0];
-			if ( isset($url[1]) && $url[1] !== ''  ) {
-				if ( !method_exists($controller, $url[1]) ){
-					require 'modules/f404/controller.php';
-					$controller = new File_not_exist();
-					return false;
-				} elseif( isset($url[2]) ) {
-					$controller->{$url[1]}($url[2]);
-				} else {
-					$controller->{$url[1]}();
-				}
-			}
 		} else {
 			//page 404
 			require 'modules/f404/controller.php';
@@ -46,10 +35,13 @@ class Bootstrap {
 			return false;
 		}
 
-		if(isset($url[1])) {
-			//call the function
-			if(isset($url[2])){
-				//pass params
+		if ( isset($url[1]) && $url[1] !== ''  ) {
+			if ( !method_exists($controller, $url[1]) ){
+				require 'modules/f404/controller.php';
+				$controller = new File_not_exist();
+				$controller->index();
+				die;
+			} elseif( isset($url[2]) ) {
 				$controller->{$url[1]}($url[2]);
 			} else {
 				$controller->{$url[1]}();
@@ -58,5 +50,6 @@ class Bootstrap {
 			//call index function
 			$controller->index();
 		}
+
 	}
 }
