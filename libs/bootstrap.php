@@ -31,6 +31,8 @@ class Bootstrap {
 			if ( isset($url[1]) && $url[1] !== ''  ) {
 				if ( !method_exists($controller, $url[1]) ){
 					require 'modules/f404/controller.php';
+					$controller = new File_not_exist();
+					return false;
 				} elseif( isset($url[2]) ) {
 					$controller->{$url[1]}($url[2]);
 				} else {

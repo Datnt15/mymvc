@@ -136,21 +136,8 @@ form.login a:hover
     color: #2ecc71;
 }
 
-.posted-by
-{
-    position: relative;
-    top: 400px;
-    float: none;
-    margin: 0 auto;
-    color: #FFF;
-    background-color: rgba(0, 0, 0, 0.66);
-    padding: 10px;
-    width: 300px;
-    // left: 45%;
-}
-
 a.transparent {
-    width: 100px;
+    min-width: 100px;
     padding: 5px;
     background: transparent;
     // color: #d9534f;
@@ -163,7 +150,7 @@ a.transparent {
 }
 
 a.transparent:hover{
-    text-decoration: none;
+    text-decoration: none !important;
     border: 1px solid #2ecc71;
 }
 

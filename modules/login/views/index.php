@@ -16,7 +16,7 @@
 	<script src="<?= base_url; ?>assets/js/jquery-1.11.0.js"></script>
 	<script src="<?= base_url; ?>assets/js/bootstrap.min.js"></script>
 	<script src="<?= base_url; ?>assets/js/login.js"></script>
-	
+
 </head>
 <body>
 	<div class="container">
@@ -39,10 +39,10 @@
 
 		                <div class="row">
                             <div class="col-md-6 col-xs-6 col-sm-6">
-                            	<a class="transparent pull-left">Register</a>
+                            	<a href="<?= base_url?>register" class="transparent pull-left">Register</a>
                            	</div>
                             <div class="col-md-6 col-xs-6 col-sm-6">
-                            	<a class="transparent pull-right">Pass this</a>
+                            	<a href="<?= base_url?>" class="transparent pull-right">Pass this</a>
                             </div>		                        
 		                </div>
 		                <div class="row">
