@@ -9,8 +9,7 @@ class Bootstrap {
 		// Define base url
 		define('base_url', 'http://nguyendangdungha.com/mymvc/');
 		
-		// Include db handle file
-		require 'db.php';
+		
 		
 		$_GET   = filter_input_array(INPUT_GET,FILTER_SANITIZE_STRING);		
 

@@ -6,6 +6,7 @@ class Register_model extends Model
 {
 
 	private $table = 'users';
+	
 	function __construct() {
 		parent::__construct();	
 	}
