@@ -1,0 +1,310 @@
+body, html
+{
+    background: url('../img/login_bg.jpg') fixed;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    padding: 0;
+    margin: 0;
+    font-family: 'Roboto' , sans-serif;
+    position: relative;
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+    width: 100%;
+    height: 100%;
+}
+
+body::before, html::before {
+  content: '';
+  position: absolute;
+  background: url('../img/login_bg.jpg') fixed;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  min-height: 100%;
+  height: 100%;
+  padding: 0;
+  -webkit-filter: url("#blur");
+  filter: url("#blur");
+  -webkit-filter: blur(10px);
+  filter: blur(10px);
+}
+
+.wrap
+{
+    width: 100%;
+    height: 100%;
+    min-height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99;
+}
+
+p.form-title
+{
+    font-family: 'Roboto' , sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: center;
+    color: #FFFFFF;
+    margin-top: 5%;
+    text-transform: uppercase;
+    letter-spacing: 4px;
+}
+
+form
+{
+    width: 300px;
+    float: none;
+    margin: 0 auto;
+}
+
+form.login input[type="text"], form.login input[type="password"]
+{
+    width: 100%;
+    margin: 0;
+    padding: 5px 10px 5px 40px;
+    background: 0;
+    border: 0;
+    border: 1px solid #FFFFFF;
+    border-radius: 3px;
+    outline: 0;
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 1px;
+    margin-bottom: 5px;
+    color: #FFFFFF;
+    outline: 0;
+}
+
+form.login input[type="submit"]
+{
+    width: 100%;
+    font-size: 14px;
+    text-transform: uppercase;
+    font-weight: 400;
+    margin-top: 16px;
+    outline: 0;
+    cursor: pointer;
+    letter-spacing: 1px;
+}
+
+form.login input[type="submit"]:hover
+{
+    transition: background-color 0.5s ease;
+}
+
+form.login .remember-forgot
+{
+    float: left;
+    width: 100%;
+    margin: 10px 0 0 0;
+}
+form.login label, form.login a
+{
+    font-size: 14px;
+    font-weight: 400;
+    color: #FFFFFF;
+}
+
+form.login a
+{
+    transition: color 0.5s ease;
+}
+
+form.login .form-group{
+    position: relative;
+}
+
+form.login .form-group i{
+    color: #fff;
+    position: absolute;
+    left: 0;
+    border-right: 1px solid #fff;
+    margin: 5px;
+    padding-right: 5px;
+    width: 30px;
+    text-align: center;
+    padding-top: 5px;
+}
+
+form.login a:hover
+{
+    color: #2ecc71;
+}
+
+.posted-by
+{
+    position: relative;
+    top: 400px;
+    float: none;
+    margin: 0 auto;
+    color: #FFF;
+    background-color: rgba(0, 0, 0, 0.66);
+    padding: 10px;
+    width: 300px;
+    // left: 45%;
+}
+
+a.transparent {
+    width: 100px;
+    padding: 5px;
+    background: transparent;
+    // color: #d9534f;
+    color: #FFFFFF;
+    border: 1px solid #FFFFFF;
+    border-radius: 20px;
+    margin-top: 20px;
+    text-align: center;
+    cursor: pointer;
+}
+
+a.transparent:hover{
+    text-decoration: none;
+    border: 1px solid #2ecc71;
+}
+
+button.transparent:focus {
+    outline: none;
+}
+
+#results{
+    margin-top: 20px;
+}
+
+i.fa-info {
+  -webkit-animation: wrench 2.5s ease infinite;
+          animation: wrench 2.5s ease infinite;
+  transform-origin-x: 90%;
+  transform-origin-y: 35%;
+  transform-origin-z: initial;
+}
+
+/* WRENCH */
+@-webkit-keyframes wrench {
+  0% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
+  }
+  8% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  10% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  18% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  20% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  28% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  30% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  38% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  40% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  48% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  50% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  58% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  60% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  68% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  75% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}
+@keyframes wrench {
+  0% {
+    -webkit-transform: rotate(-12deg);
+            transform: rotate(-12deg);
+  }
+  8% {
+    -webkit-transform: rotate(12deg);
+            transform: rotate(12deg);
+  }
+  10% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  18% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  20% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  28% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  30% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  38% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  40% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  48% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  50% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  58% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  60% {
+    -webkit-transform: rotate(-24deg);
+            transform: rotate(-24deg);
+  }
+  68% {
+    -webkit-transform: rotate(24deg);
+            transform: rotate(24deg);
+  }
+  75% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg);
+  }
+}

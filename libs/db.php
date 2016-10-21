@@ -6,11 +6,11 @@ class Database {
 
     private $HOST_NAME = 'localhost';
 
-    private $USER_NAME = 'my_mvc_user';
+    private $USER_NAME = 'root';
 
-    private $USER_PASS = 'my_mvc_user_123';
+    private $USER_PASS = '';
 
-    private $DB_NAME   = 'mymvc_db';
+    private $DB_NAME   = 'my_mvc_db';
 
     private $conn;
 
