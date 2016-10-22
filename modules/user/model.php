@@ -114,8 +114,8 @@ class User_model extends Model
 	 * @return boolean [user is logged in or not]
 	 */
 	public function is_logged_in(){
-		$uid = Cookie::get_cookie('uid');
-		$secret_code = Cookie::get_cookie('secret_code');
+		$uid = $this->cookie->get('uid');
+		$secret_code = $this->cookie->get('secret_code');
 		if ( $uid !== '' && $secret_code !== '' ) {
 			$user = $this->db->get_row($this->table, array('uid' => $uid, 'secret_code' => $secret_code) );
 			if (!empty($user)) {
