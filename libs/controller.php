@@ -7,10 +7,14 @@ class Controller {
 	 * __construct
 	 */
 	public $name = null;
-    
+    protected $cookie;
+    protected $session;
+    protected $input;
 
 	function __construct($clsName) {
 		$this->name = $clsName;
+        $this->cookie = new Cookie();
+        $this->session = new Session();
 	}
 	
 	/**

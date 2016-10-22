@@ -123,8 +123,8 @@ class User_model extends Model
 			}
 		}
 		
-		$uid = Session::get_session('uid');
-		$secret_code = Session::get_session('secret_code');
+		$uid = $this->session->get('uid');
+		$secret_code = $this->session->get('secret_code');
 		if ( $uid !== null && $secret_code !== null ) {
 			$user = $this->db->get_row($this->table, array('uid' => $uid, 'secret_code' => $secret_code) );
 			if (!empty($user)) {

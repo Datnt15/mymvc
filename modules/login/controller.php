@@ -43,8 +43,8 @@ class Login extends Controller
             $user = $this->user->get_user($where);
             // Lay thành công
             if ( !empty($user) ) {
-            	Session::set_session('uid', $user['uid']);
-            	Session::set_session('secret_code', $user['secret_code']);
+            	$this->session->set('uid', $user['uid']);
+            	$this->session->set('secret_code', $user['secret_code']);
             	if ( $_POST['remember'] == 'true') {
             		Cookie::set_cookie('uid', $user['uid']);
             		Cookie::set_cookie('secret_code', $user['secret_code']);

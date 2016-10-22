@@ -14,20 +14,20 @@ class Session
         
     }
 
-    public function get_session($key){
+    public function get($key){
     	return $_SESSION[$key];
     }
 
 
-    public function set_session($key, $value){
+    public function set($key, $value){
     	$_SESSION[$key] = $value;
     }
 
-    public function delete_session($key){
+    public function delete($key){
     	$_SESSION[$key] = null;
     }
 
-    public function destroy_session(){
+    public function destroy(){
     	session_unset();
     	session_destroy();
     }
