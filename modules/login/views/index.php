@@ -37,6 +37,13 @@
 	                		<i class="fa fa-lg fa-lock" aria-hidden="true"></i>
 		                	<input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}[^'\x22\s@!]+" title="Chứa ít nhât một số, chữ hoa, chữ thường và dài tối thiểu 4 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
 		                </div>
+		                <div class="form-group">
+	                        <label for="remember">Remember me </label>
+		                	<div class="material-switch pull-right">
+	                            <input id="remember" name="remember" type="checkbox" value="checked" style="display: none;" />
+	                            <label for="remember" class="label-success"></label>
+	                        </div>
+		                </div>
 		                <input type="submit" value="Login" id="login-btn" class="btn btn-danger btn-lg" />
 
 		                <div class="row">

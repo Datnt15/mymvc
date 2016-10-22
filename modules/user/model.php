@@ -109,5 +109,30 @@ class User_model extends Model
 		return $this->db->get_row($this->table, $where);
 	}
 
+	/**
+	 * [is_logged_in checking user logged in]
+	 * @return boolean [user is logged in or not]
+	 */
+	public function is_logged_in(){
+		$uid = Cookie::get_cookie('uid');
+		$secret_code = Cookie::get_cookie('secret_code');
+		if ( $uid !== '' && $secret_code !== '' ) {
+			$user = $this->db->get_row($this->table, array('uid' => $uid, 'secret_code' => $secret_code) );
+			if (!empty($user)) {
+				return true;
+			}
+		}
+		
+		$uid = Session::get_session('uid');
+		$secret_code = Session::get_session('secret_code');
+		if ( $uid !== null && $secret_code !== null ) {
+			$user = $this->db->get_row($this->table, array('uid' => $uid, 'secret_code' => $secret_code) );
+			if (!empty($user)) {
+				return true;
+			}
+		}
+		return flase;
+	}
+
 
 }

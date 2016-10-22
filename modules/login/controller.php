@@ -13,6 +13,9 @@ class Login extends Controller
 
 	public function index(){
 		$this->load_view('index');
+		if ($this->user->is_logged_in() === true) {
+			header("Location: " . base_url);
+		}
 	}
 
 	public function check_login(){
@@ -40,12 +43,20 @@ class Login extends Controller
             $user = $this->user->get_user($where);
             // Lay thành công
             if ( !empty($user) ) {
+            	Session::set_session('uid', $user['uid']);
+            	Session::set_session('secret_code', $user['secret_code']);
+            	if ( $_POST['remember'] == 'true') {
+            		Cookie::set_cookie('uid', $user['uid']);
+            		Cookie::set_cookie('secret_code', $user['secret_code']);
+            	}
+            	
             	echo json_encode( 
             		array(
             			'stt' => 'success',
             			'message' => 'Login successfuly!'
             		) 
             	);
+
             	return false;
             }
             // Thất bại tràn trề

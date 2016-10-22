@@ -5,7 +5,8 @@ jQuery(document).ready(function($) {
 			$("#login-form").attr('action'), 
 			{
 				username : $("#username").val(),
-		        password : $("#password").val()
+		        password : $("#password").val(),
+		        remember : ($('input#remember').prop('checked')) ? true : false,
 		    }, function(data) {
 		    	data = JSON.parse(data);
 			    console.log(data);
@@ -15,9 +16,9 @@ jQuery(document).ready(function($) {
 				message += "<i class=\"fa fa-info fa-fw\"></i> " + data.message + "</div>";
 				$("#results").append(message);
 				$("#results").slideDown('400');
-			    // if (data.code === '1000') {
-			    // 	alert(data.message);
-			    // }
+			    if (data.stt === 'success') {
+			    	window.location.replace($('base').attr('href'));
+			    }
 			    return false;
 			}
 		);
