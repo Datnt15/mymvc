@@ -31,7 +31,7 @@ class Cookie
 
     public function destroy(){
     	foreach ($_COOKIE as $key => $value) {
-            Cookie::delete_cookie($key);
+            Cookie::delete($key);
         }
         // unset cookies
         unset($_COOKIE);

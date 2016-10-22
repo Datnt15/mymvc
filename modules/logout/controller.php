@@ -11,8 +11,8 @@ class Logout extends Controller
 	}
 
 	public function index(){
-		Session::destroy_session();
-        Cookie::destroy_cookie();
+		$this->session->destroy();
+        $this->cookie->destroy();
         header("Location: " . base_url . "login/");
 	}
 

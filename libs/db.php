@@ -100,7 +100,7 @@ class Database {
     /**
      * [get_row Lấy dữ liệu trên một bản ghi]
      * @param  [string] $table [Tên bảng]
-     * @param  [array] $where [mảng điều kiện]
+     * @param  [array] $where [mảng điều kiện ]
      * @return [array]        [mảng dữ liệu trả về nếu có hoặc một mảng rỗng]
      */
     public function get_row($table, $where){

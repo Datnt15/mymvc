@@ -28,6 +28,9 @@ class Session
     }
 
     public function destroy(){
+        foreach ($_SESSION as $key => $value) {
+            unset($_SESSION[$key]);
+        }
     	session_unset();
     	session_destroy();
     }
