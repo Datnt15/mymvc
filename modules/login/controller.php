@@ -46,8 +46,8 @@ class Login extends Controller
             	$this->session->set('uid', $user['uid']);
             	$this->session->set('secret_code', $user['secret_code']);
             	if ( $_POST['remember'] == 'true') {
-            		$this->cookie->set('uid', $user['uid']);
-            		$this->cookie->set('secret_code', $user['secret_code']);
+            		Cookie::set_cookie('uid', $user['uid']);
+            		Cookie::set_cookie('secret_code', $user['secret_code']);
             	}
             	
             	echo json_encode( 
