@@ -64,9 +64,15 @@ class Database {
             while($row = $result->fetch_assoc()) {
                 $data[] = $row;
             }
+            return $data;
         }
+        elseif($result !== false && $result->num_rows < 1){
+            // Chỉ thực hiện lệnh bình thường
+            return true;
+        }
+        // Lỗi
+        return false;
 
-        return $data;
     }
 
     /**
