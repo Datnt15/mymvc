@@ -50,11 +50,11 @@ class Controller {
     protected function check_title($title, $field_name = ''){
         $res = array();
         if ($title === '') {
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' can\'t be null';
         }
         elseif ( !preg_match('/^[A-Za-z0-9\s-]{4,}$/', $title) ){
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' containts only alphabet, number and hyphen anh whitespace';
         }
         return $res;
@@ -69,11 +69,11 @@ class Controller {
     protected function check_img_url($img, $field_name = ''){
         $res = array();
         if ($img === '') {
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' can\'t be null';
         }
         elseif ( !preg_match('/^[^\?]+\.(jpg|jpeg|gif|png)(?:\?|$)/', $img) ){
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' is invalid format';
         }
         return $res;
@@ -88,11 +88,11 @@ class Controller {
     protected function check_username($username, $field_name = ''){
         $res = array();
         if ($username === '') {
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' can\'t be null';
         }
         elseif ( !preg_match("/^[A-Za-z_0-9-]{3,15}[^'\x22\s@!]+$/", $username) ){
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . " containts only number, uppercase, lowercase, underscore(_), hyphen(-), maxlength is 15 and minlength is 3.";
         }
         return $res;
@@ -108,11 +108,11 @@ class Controller {
     protected function check_password($pass, $field_name = ''){
         $res = array();
         if ($pass === '') {
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' can\'t be null';
         }
         elseif ( !preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}[^'\x22\s@!]+$/", $pass) ){
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . " containts at least one number, one upercase, one lowercase, minlength is 4, can't containt some special characters like ( @, !, ', '' ) and whitespace";
         }
         return $res;
@@ -128,11 +128,11 @@ class Controller {
     protected function check_email($email, $field_name = ''){
         $res = array();
         if ($email === '') {
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' can\'t be null';
         }
         elseif ( !filter_var($email, FILTER_VALIDATE_EMAIL) ){
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] =$field_name . ' is invalid format';
         }
         return $res;
@@ -148,11 +148,11 @@ class Controller {
     protected function check_number($number, $field_name = ''){
         $res = array();
         if ($number === '') {
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] = $field_name . ' can\'t be null';
         }
         elseif ( !preg_match("/^[0-9]{1,15}$/", $number ) ){
-            $res['stt'] = 'fasle';
+            $res['stt'] = 'failure';
             $res['message'] =$field_name . ' containts numbers only';
         }
         return $res;

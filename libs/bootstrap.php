@@ -5,11 +5,7 @@ error_reporting(1);
 */
 class Bootstrap {
 	
-	function __construct() {
-		// Define base url
-		define('base_url', 'http://nguyendangdungha.com/mymvc/');
-		
-		
+	function __construct() {		
 		
 		$_GET   = filter_input_array(INPUT_GET,FILTER_SANITIZE_STRING);		
 

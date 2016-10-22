@@ -51,7 +51,7 @@ class Login extends Controller
             // Thất bại tràn trề
             else {
             	echo json_encode( array(
-	            		'stt' => 'faild',
+	            		'stt' => 'failure',
             			'message' => $where['password']
             		) );
             	return false;
