@@ -12,18 +12,26 @@ class Login extends Controller
 	}
 
 	public function index(){
-		$this->load_view('index');
-		if ($this->user->is_logged_in() === true) {
-			header("Location: " . base_url);
-		}
+        $this->load_view('index');
+
+        if ( $this->user->is_logged_in() === true ) {
+            // Redirect to home page user are already logged in
+            
+            print_r($this->cookie->get());die;
+            ?>
+            <script>
+                window.location.replace($('base').attr('href'));
+            </script>
+            <?php
+        }
 	}
 
 	public function check_login(){
 
 		if( isset($_POST) ){
 			$where = array(
-				'username' => $_POST['username'],
-				'password' => $_POST['password'],
+				'username' => $this->input->post('username'),
+				'password' => $this->input->post('password'),
             	);
             
             $check = $this->check_username($where['username'], 'Username');
@@ -41,11 +49,16 @@ class Login extends Controller
 
             $where['password'] = md5($where['password']);
             $user = $this->user->get_user($where);
+
             // Lay thành công
             if ( !empty($user) ) {
+
+                // Set session data
             	$this->session->set('uid', $user['uid']);
             	$this->session->set('secret_code', $user['secret_code']);
-            	if ( $_POST['remember'] == 'true') {
+
+            	if ( $this->input->post('remember') == 'true') {
+                    // Store cookie data if user clicked "Remember me" button
             		$this->cookie->set('uid', $user['uid']);
             		$this->cookie->set('secret_code', $user['secret_code']);
             	}

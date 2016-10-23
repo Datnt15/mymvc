@@ -12,7 +12,7 @@ class Index extends Controller
 
 	function index(){
 		echo "index page";
-		// print_r($_COOKIE);
+		print_r($this->cookie->get());
 	}
 	
 }

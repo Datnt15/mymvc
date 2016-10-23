@@ -20,9 +20,9 @@ class Register extends Controller
 		$users = $this->user->get_all_users();
 		if( isset($_POST) ){
 			$data = array(
-				'username' => $_POST['username'],
-				'password' => $_POST['password'],
-				'email'    => $_POST['email'],
+				'username' => $this->input->post('username'),
+				'password' => $this->input->post('password'),
+				'email'    => $this->input->post('email'),
             	);
             
             $check = $this->check_username($data['username'], 'Username');

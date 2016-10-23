@@ -14,7 +14,16 @@ class Session
         
     }
 
-    public function get($key){
+    public function get($key = ''){
+        // Get whole array
+        if ($key === '') {
+            return $_SESSION;
+        }
+        // If key not in array
+        if ( !in_array($key, array_keys($_SESSION))) {
+            return NULL;
+        }
+        // If key exists in array
     	return $_SESSION[$key];
     }
 
@@ -29,6 +38,7 @@ class Session
 
     public function destroy(){
         foreach ($_SESSION as $key => $value) {
+            self::delete($key);
             unset($_SESSION[$key]);
         }
     	session_unset();

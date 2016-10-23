@@ -15,6 +15,7 @@ class Controller {
 		$this->name = $clsName;
         $this->cookie = new Cookie();
         $this->session = new Session();
+        $this->input = new Input();
 	}
 	
 	/**

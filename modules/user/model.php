@@ -116,7 +116,7 @@ class User_model extends Model
 	public function is_logged_in(){
 		$uid = $this->cookie->get('uid');
 		$secret_code = $this->cookie->get('secret_code');
-		if ( $uid !== '' && $secret_code !== '' ) {
+		if ( $uid !== NULL && $secret_code !== '' ) {
 			$user = $this->db->get_row($this->table, array('uid' => $uid, 'secret_code' => $secret_code) );
 			if (!empty($user)) {
 				return true;
@@ -125,7 +125,7 @@ class User_model extends Model
 		
 		$uid = $this->session->get('uid');
 		$secret_code = $this->session->get('secret_code');
-		if ( $uid !== null && $secret_code !== null ) {
+		if ( $uid !== '' && $secret_code !== null ) {
 			$user = $this->db->get_row($this->table, array('uid' => $uid, 'secret_code' => $secret_code) );
 			if (!empty($user)) {
 				return true;

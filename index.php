@@ -10,6 +10,7 @@ require 'libs/model.php';
 require 'libs/view.php';
 require 'libs/session.php';
 require 'libs/cookie.php';
+require 'libs/input.php';
 
 $app = new Bootstrap();
 

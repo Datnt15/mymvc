@@ -30,7 +30,7 @@
 	                <form class="login" id="register-form" method="POST" action="<?= base_url . 'register/register' ?>" >
 	                	<div class="form-group">
 			                <i class="fa fa-lg fa-user" aria-hidden="true"></i>
-			                <input type="text" name="username" id="username" placeholder="Username or Email" pattern="[A-Za-z_0-9-]{3,15}[^'\x22\s@!]+" title="Chỉ chứa số, chữ hoa, chữ thường, gạch dưới '_', gạch nối '-' dài tối thiểu 3 đến 15 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
+			                <input type="text" name="username" id="username" placeholder="Username" pattern="[A-Za-z_0-9-]{3,15}[^'\x22\s@!]+" title="Chỉ chứa số, chữ hoa, chữ thường, gạch dưới '_', gạch nối '-' dài tối thiểu 3 đến 15 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
 	                	</div>
 
 	                	<div class="form-group">
