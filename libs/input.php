@@ -41,7 +41,8 @@ class Input
 		{
 			$value = $array[$index];
 		}
-		elseif (($count = preg_match_all('/(?:^[^\[]+)|\[[^]]*\]/', $index, $matches)) > 1) // Does the index contain array notation
+		elseif (($count = preg_match_all('/(?:^[^\[]+)|\[[^]]*\]/', $index, $matches)) > 1) 
+		// Does the index contain array notation
 		{
 			$value = $array;
 			for ($i = 0; $i < $count; $i++)

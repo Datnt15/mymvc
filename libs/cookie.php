@@ -13,7 +13,12 @@ class Cookie
     }
 
     public function set($key, $value){
-    	setcookie($key, $value, time()+3600*24*30);
+        $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        if ($browser === 'Chrome') {
+            
+        	setcookie($key, $value, time()+3600*24*30, '/', NULL);
+        }
+        else setcookie($key, $value, time()+3600*24*30, '/');
     }
 
     public function get($key = ''){
@@ -33,7 +38,12 @@ class Cookie
 
     	unset($_COOKIE[$key]);
 
-		setcookie($key,'',time()-3600*24*30);
+		$browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
+        if ($browser === 'Chrome') {
+            
+            setcookie($key, '', time()-3600*24*30, '/', NULL);
+        }
+        else setcookie($key,'',time()-3600*24*30, '/');
     }
 
     public function destroy(){
@@ -47,12 +57,28 @@ class Cookie
         // Delete all item's value in $_SERVER variable
         if (isset($_SERVER['HTTP_COOKIE'])) {
             $cookies = explode(';', $_SERVER['HTTP_COOKIE']);
+            $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
             foreach($cookies as $cookie) {
                 $parts = explode('=', $cookie);
                 $name = trim($parts[0]);
-                setcookie($name, '', time()-3600*24*30);
+                if ($browser === 'Chrome') {
+                    
+                    setcookie($name, '', time()-+3600*24*30, '/', NULL);
+                }
+                else setcookie($name, '', time()-3600*24*30, '/');
             }
         }
+    }
+
+    private function get_browser_name($user_agent){
+        if (strpos($user_agent, 'Opera') || strpos($user_agent, 'OPR/')) return 'Opera';
+        elseif (strpos($user_agent, 'Edge')) return 'Edge';
+        elseif (strpos($user_agent, 'Chrome')) return 'Chrome';
+        elseif (strpos($user_agent, 'Safari')) return 'Safari';
+        elseif (strpos($user_agent, 'Firefox')) return 'Firefox';
+        elseif (strpos($user_agent, 'MSIE') || strpos($user_agent, 'Trident/7')) return 'Internet Explorer';
+        
+        return 'Other';
     }
 }
 

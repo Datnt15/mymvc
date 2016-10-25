@@ -10,12 +10,19 @@ class Controller {
     protected $cookie;
     protected $session;
     protected $input;
+    protected $user;
+    protected $gallery;
+    protected $validation;
 
 	function __construct($clsName) {
 		$this->name = $clsName;
         $this->cookie = new Cookie();
         $this->session = new Session();
         $this->input = new Input();
+        $this->user = new User();
+        $this->gallery = new Gallery();
+        $this->validation = new Validation();
+
 	}
 	
 	/**
@@ -45,6 +52,21 @@ class Controller {
 		$cls1 = $name."_model";
 		return new $cls1();
 	}
+
+	// /**
+	//  * [load_module description]
+	//  * @param  [string] $name 		   [module name]
+	//  * @return [object] new $name      [object of model]
+	//  */
+	
+	// public function load_module($name){
+	// 	//echo getcwd();
+	// 	if ($name == '') die;
+
+	// 	require "modules/".strtolower($name)."/controller.php";
+	// 	$controller = ucfirst($name);
+	// 	$controller::index();
+	// }
 
 
 

@@ -1,345 +1,216 @@
-body, html
-{
-    background: url('../images/login_bg.jpg') fixed;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
-    padding: 0;
-    margin: 0;
-    font-family: 'Roboto' , sans-serif;
-    position: relative;
-    -webkit-font-smoothing: antialiased;
-    -webkit-text-size-adjust: 100%;
-    text-rendering: optimizeLegibility;
-    width: 100%;
-    height: 100%;
+body{
+  font-family: 'Roboto', sans-serif;
 }
-
-body::before, html::before {
-  content: '';
-  position: absolute;
-  background: url('../images/login_bg.jpg') fixed;
+#login-page{
+  background: url('../images/background-login.jpg');
   background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center;
-  width: 100%;
-  min-height: 100%;
-  height: 100%;
-  padding: 0;
-  -webkit-filter: url("#blur");
-  filter: url("#blur");
-  -webkit-filter: blur(10px);
-  filter: blur(10px);
-}
-
-.wrap
-{
     width: 100%;
-    height: 100%;
-    min-height: 100%;
     position: absolute;
+    padding-top: 100px;
     top: 0;
-    left: 0;
-    z-index: 99;
 }
+.form-login{
 
-p.form-title
-{
-    font-family: 'Roboto' , sans-serif;
-    font-size: 20px;
-    font-weight: 400;
+    background: white;
+  float: none;
+    margin: auto;
+  margin-bottom: 100px;
+  -webkit-box-shadow: 0 35px 35px -6px #354c61;
+     -moz-box-shadow: 0 35px 35px -6px #354c61;
+          box-shadow: 0 35px 35px -6px #354c61;
+    padding: 0;
+}
+.block-or {
+    margin-top: 195px;
+    z-index: 100;
+    left: 47%;
+    position: absolute;
+    width: 40px;
+    height: 40px;
     text-align: center;
-    color: #FFFFFF;
-    margin-top: 5%;
-    text-transform: uppercase;
-    letter-spacing: 4px;
+    line-height: 36px;
+    font-size: 18px;
+    border-radius: 50%;
+    border: 1px #efecec solid;
+    background: white;
+    font-style: italic;
 }
-
-form
-{
-    width: 300px;
+.login{
+  min-height: 451px;
+  max-height: 451px;
+  padding: 50px 70px 15px;
+}
+.sign-in-social{
+  background-repeat: no-repeat;
+  min-height: 451px;
+  background: url('../images/ballon.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+    padding: 50px 70px 15px;
+}
+.register .checkbox label{
+  color: #8e8e8e;
+}
+.register .checkbox{
+    margin: 20px 0;
+}
+.register a{
+  color: #f6bb4f;
+}
+.sign-up-social{
+  background-repeat: no-repeat;
+  min-height: 451px;
+  background: linear-gradient(
+      rgba(246, 187, 79,0.7), rgba(246, 187, 79,0.7)
+    ),url('../images/ballon.jpg');
+  background-size: cover;
+  background-position: center;
+  color: white;
+    padding: 50px 40px 15px;
+}
+.close{
+    position: absolute;
+    top: 5px;
+    right: 10px;
+}
+.form-control{
+  border-radius: 0!important;
+}
+p.des {
+    font-size: 20px;
+    margin-bottom: 25px;
+}
+.login p.des {
+    color: #807d7d;
+}
+.form-login h1{
+  font-size: 28px;
+    margin-bottom: 5px;
+}
+.form-group label{
+    margin-bottom: 0;
+    color: #8e8e8e;
+    font-weight: 500;
+}
+.register{
+    padding-top: 65px;
+}
+.login input.form-control{
+    height: 40px;
+    border-left: none;
+    border-right: none;
+    border-top: none;
+    box-shadow: none;
+    height: 28px;
+    padding-left: 0;
+}
+.login .form-group{
+  margin-bottom: 20px;
+}
+.btn-login{
+    width: 100%;
+    height: 40px;
+    background: #f6bb4f;
+    color: white;
+    box-shadow: none;
+    border: 1px #f6bb4f solid;
+}
+.span-or{
+  float: left;
+  margin-right: 15px;
+    line-height: 40px;
+}
+.btn-register{
+  float: left;
+    width: 130px;
+    margin-right: 15px;
+    height: 40px;
+    background: #f6bb4f;
+    color: white;
+    box-shadow: none;
+    border: 1px #f6bb4f solid;
+}
+.btn-login:hover{
+  background: white;
+  color: #f6bb4f;
+}
+.forgot-pass{
+    margin-top: 5px;
+    display: block;
+    color: #ccc;
+    text-decoration: underline;
+    font-size: 13px;
+}
+.intro-sign-up{
+  margin-top: 50px;
+}
+.have-account{
+    display: block;
+    text-decoration: underline;
+    font-size: 13px;
+    float: left;
+    line-height: 40px;
+}
+a.btn-social {
+    background: white;
+    display: block;
+    width: 40px;
+    height: 40px;
+    float: left;
+    line-height: 40px;
+    font-size: 18px;
+    padding: 0;
+    margin: 10px 5px;
+    border-radius: 50%;
+}
+.list-btn-social{
     float: none;
+    width: 150px;
     margin: 0 auto;
 }
-
-form.login input[type="text"], 
-form.login input[type="email"], 
-form.login input[type="password"]
-{
-    width: 100%;
-    margin: 0;
-    padding: 5px 10px 5px 40px;
-    background: 0;
-    border: 0;
-    border: 1px solid #FFFFFF;
-    border-radius: 3px;
-    outline: 0;
-    font-size: 14px;
-    font-weight: 400;
-    letter-spacing: 1px;
-    margin-bottom: 5px;
-    color: #FFFFFF;
-    outline: 0;
+a.btn-social i.fa-facebook{
+  color: #3b5998;
 }
-
-form.login input[type="submit"]
-{
-    width: 100%;
-    font-size: 14px;
-    text-transform: uppercase;
-    font-weight: 400;
-    margin-top: 16px;
-    outline: 0;
-    cursor: pointer;
-    letter-spacing: 1px;
+a.btn-social i.fa-twitter{
+  color: #1dcaff;
 }
-
-form.login input[type="submit"]:hover
-{
-    transition: background-color 0.5s ease;
+a.btn-social i.fa-google-plus{
+  color: #d34836;
 }
-
-form.login .remember-forgot
-{
-    float: left;
-    width: 100%;
-    margin: 10px 0 0 0;
+.dont-have-account{
+    margin-top: 150px;
+    margin-bottom: 0;
 }
-form.login label, form.login a
-{
-    font-size: 14px;
-    font-weight: 400;
-    color: #FFFFFF;
+#login-page a.register-redirect{
+    display: block;
+    color: white;
+    text-decoration: underline;
+    font-size: 13px;
 }
-
-form.login a
-{
-    transition: color 0.5s ease;
-}
-
-form.login .form-group{
-    position: relative;
-}
-
-form.login .form-group i{
-    color: #fff;
-    position: absolute;
-    left: 0;
-    border-right: 1px solid #fff;
-    margin: 5px;
-    padding-right: 5px;
-    width: 30px;
-    text-align: center;
-    padding-top: 5px;
-}
-
-form.login a:hover
-{
-    color: #2ecc71;
-}
-
-a.transparent {
-    min-width: 100px;
-    padding: 5px;
-    background: transparent;
-    // color: #d9534f;
-    color: #FFFFFF;
-    border: 1px solid #FFFFFF;
-    border-radius: 20px;
-    margin-top: 20px;
-    text-align: center;
-    cursor: pointer;
-}
-
-a.transparent:hover{
-    text-decoration: none !important;
-    border: 1px solid #2ecc71;
-}
-
-button.transparent:focus {
-    outline: none;
-}
-
-#results{
-    margin-top: 20px;
-}
-
-i.fa-info {
-  -webkit-animation: wrench 2.5s ease infinite;
-          animation: wrench 2.5s ease infinite;
-  transform-origin-x: 90%;
-  transform-origin-y: 35%;
-  transform-origin-z: initial;
-}
-
-/* WRENCH */
-@-webkit-keyframes wrench {
-  0% {
-    -webkit-transform: rotate(-12deg);
-            transform: rotate(-12deg);
-  }
-  8% {
-    -webkit-transform: rotate(12deg);
-            transform: rotate(12deg);
-  }
-  10% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  18% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  20% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  28% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  30% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  38% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  40% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  48% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  50% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  58% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  60% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  68% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  75% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+@media (min-width: 992px){
+  #login-page{
+    height: 100%;
   }
 }
-@keyframes wrench {
-  0% {
-    -webkit-transform: rotate(-12deg);
-            transform: rotate(-12deg);
+@media (max-width: 992px){
+  .sign-in-social,.login{
+    padding: 50px 50px 15px!important;
   }
-  8% {
-    -webkit-transform: rotate(12deg);
-            transform: rotate(12deg);
+}
+@media (max-width: 768px){
+  .sign-in-social,.login{
+    padding: 50px 30px 15px!important;
   }
-  10% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
+  #login-page{
+    position: relative!important;
+    height: 100%;
   }
-  18% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  20% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  28% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  30% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  38% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  40% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  48% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  50% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  58% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  60% {
-    -webkit-transform: rotate(-24deg);
-            transform: rotate(-24deg);
-  }
-  68% {
-    -webkit-transform: rotate(24deg);
-            transform: rotate(24deg);
-  }
-  75% {
-    -webkit-transform: rotate(0deg);
-            transform: rotate(0deg);
+  .block-or {
+    display: none!important;
   }
 }
 
-//===================== Switch button =======================//
-.material-switch > input[type="checkbox"] {
-    display: none;   
-}
-
-.material-switch > label {
-    cursor: pointer;
-    height: 0px;
-    position: relative; 
-    width: 40px;  
-}
-
-.material-switch > label::before {
-    background: #dbe9f1;
-    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.5);
-    border-radius: 8px;
-    content: '';
-    height: 16px;
-    margin-top: -8px;
-    position:absolute;
-    opacity: 0.3;
-    transition: all 0.4s ease-in-out;
-    width: 40px;
-}
-.material-switch > label::after {
-    background: rgb(255, 255, 255);
-    border-radius: 16px;
-    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
-    content: '';
-    height: 24px;
-    left: -4px;
-    margin-top: -8px;
-    position: absolute;
-    top: -4px;
-    transition: all 0.3s ease-in-out;
-    width: 24px;
-}
-.material-switch > input[type="checkbox"]:checked + label::before {
-    background: inherit;
-    opacity: 0.5;
-}
-.material-switch > input[type="checkbox"]:checked + label::after {
-    background: inherit;
-    left: 20px;
+.alert{
+  margin-bottom: 0px;
 }

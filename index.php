@@ -11,6 +11,10 @@ require 'libs/view.php';
 require 'libs/session.php';
 require 'libs/cookie.php';
 require 'libs/input.php';
+require 'libs/config.php';
+require 'libs/user.php';
+require 'libs/gallery.php';
+require 'libs/validation.php';
 
 $app = new Bootstrap();
 

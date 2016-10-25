@@ -78,6 +78,7 @@ class Database {
     /**
      * [add_row Thêm một bản ghi mới vào bảng]
      * @param [array] $data  [mảng dữ liệu đầu vào]
+     * $data = array('username' => 'John_Doe', 'email' => 'example@gmail.com');
      * @param [string] $table [tên bảng để thêm dữ liệu]
      * @return [boolean/int] [trạng thái xử lý lệnh (false) hoặc ID bản ghi mới thêm]
      */
@@ -101,7 +102,7 @@ class Database {
      * [get_row Lấy dữ liệu trên một bản ghi]
      * @param  [string] $table [Tên bảng]
      * @param  [array] $where [mảng điều kiện ]
-     * example: $where = array('username' => 'John_Doe', email => 'exmple@gmail.com');
+     * $where = array('uid' => 1, username' => 'John_Doe', email => 'exmple@gmail.com');
      * @return [array]        [mảng dữ liệu trả về nếu có hoặc một mảng rỗng]
      */
     public function get_row($table, $where){
@@ -142,6 +143,7 @@ class Database {
      * [get_rows Lấy dữ liệu trên nhiều bản ghi]
      * @param  [string] $table [Tên bảng]
      * @param  [array] $where [mảng điều kiện]
+     * $where = array('uid' => 1, username' => 'John_Doe', email => 'exmple@gmail.com');
      * @return [array]        [mảng dữ liệu trả về nếu có hoặc một mảng rỗng]
      */
     public function get_rows($table, $where){
@@ -181,11 +183,57 @@ class Database {
         return $data;
     }
 
+
+    /**
+     * [count Đếm số bản ghi trong bảng theo điều di]
+     * @param  [string] $table [Tên bảng]
+     * @param  [array] $where [mảng điều kiện]
+     * $where = array('uid' => 1, username' => 'John_Doe', email => 'exmple@gmail.com');
+     * @return [array]        [mảng dữ liệu trả về nếu có hoặc một mảng rỗng]
+     */
+    public function count($table, $where){
+
+        $sql = "SELECT count(*) FROM $table WHERE ";
+        $i = 0;
+        // Xử lý mảng điều kiện
+        foreach ($where as $key => $value) {
+            // Gán điều kiện
+            $sql .= "`" . $key . "`='" . $value ."' ";
+
+
+            // Nếu mảng chỉ có một phần tử thì không thêm dấu ','
+            // EX: "SELECT * FROM 'table' WHERE ID=1;"
+            if (count($where) < 2) {
+                break;
+            }
+
+            // Thêm liên từ
+            elseif (++$i !== count($where)) {
+                $sql .= "AND ";
+            }
+
+        }
+        
+        $result = $this->conn->query($sql);
+
+        $count = 0;
+        // Kiểm tra dữ liệu trả về có hoặc không
+        if ($result !== false && $result->num_rows > 0) {
+            // Gán dữ liệu vào mảng trả về
+            $row = $result->fetch_assoc();
+            $count = $row['count(*)'];
+        }
+
+        return $count;
+    }
+
     /**
      * [update Cập nhật một bản ghi]
      * @param  [string] $table [tên bảng]
      * @param  [array] $data  [thông tin cập nhật]
+     * $data = array('username' => 'Nguyen_Tien_Dat', 'email' => 'tiendatbt19@gmail.com');
      * @param  [array] $where [Điều kiện]
+     * $where = array('uid' => 1, username' => 'John_Doe', email => 'exmple@gmail.com');
      * @return [boolean]        [trạng thái cập nhật(true/false)]
      */
     public function update($table, $data, $where){
@@ -227,6 +275,7 @@ class Database {
      * [delete Xóa một bản ghi]
      * @param  [string] $table [tên bảng]
      * @param  [array] $where Mảng các điều kiện ràng buộc
+     * $where = array('uid' => 1, username' => 'John_Doe', email => 'exmple@gmail.com');
      * @return [boolean]        [trạng thái thực thi lệnh(true/false)]
      */
     public function delete($table, $where){

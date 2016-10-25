@@ -21,46 +21,76 @@
 
 </head>
 <body>
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-12">
-	            <div class="wrap">
-	                <p class="form-title">
-	                    Register</p>
-	                <form class="login" id="register-form" method="POST" action="<?= base_url . 'register/register' ?>" >
-	                	<div class="form-group">
-			                <i class="fa fa-lg fa-user" aria-hidden="true"></i>
-			                <input type="text" name="username" id="username" placeholder="Username" pattern="[A-Za-z_0-9-]{3,15}[^'\x22\s@!]+" title="Chỉ chứa số, chữ hoa, chữ thường, gạch dưới '_', gạch nối '-' dài tối thiểu 3 đến 15 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
+	
+	<div id="login-page">
+		<div class="form-login col-md-7 col-sm-9 col-xs-11">
+			<div class="sign-up-social col-md-4 col-sm-4 col-xs-12 text-center">
+
+				<!-- Intro -->
+				<h1><b>Sign Up</b></h1>
+
+				<p class="des"><i>your account</i></p>
+				
+				<p class="intro-sign-up">
+					Et habitant ullamcorper adipiscing cubilia phasellus proin sagittis consequat suspendisse laoreet scelerisque.
+				</p>
+			</div>
+			<div class="login register col-md-8 col-sm-8 col-xs-12">
+
+				<!-- Registration form -->
+				<form id="register-form" method="POST" action="<?= base_url . 'register/register' ?>">
+					
+					<!-- Username -->
+					<div class="form-group">
+						<label for="username">Username</label>
+						<input type="text" name="username" id="username" class="form-control">
+					</div>
+					
+
+					<!-- Email -->
+					<div class="form-group">
+						<label for="email">Email</label>
+						<input type="email" name="email" id="email" class="form-control">
+					</div>
+
+
+					<!-- Password -->
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" name="password" id="password" class="form-control">
+					</div>
+
+
+					<!-- Terms and Conditions checkbox -->
+					<div class="checkbox">
+					  	<label>
+					  		<input type="checkbox" value="">By signing up I agree with 
+					  		<a href="">Terms and conditions</a>
+					  	</label>
+					</div>
+
+
+					<!-- Submit button -->
+					<input id="register-btn" type="submit" value="REGISTER" class="btn-register">
+					
+					
+					<!-- Login link -->
+					<span class="span-or">or</span>
+					<a href="<?= base_url;?>login" class="have-account"><i>Have Account?</i></a>
+
+					<!-- Results message -->
+					<div class="row">
+	                	<div class="col-md-12" id="results">
+	                		
 	                	</div>
+	                </div>
 
-	                	<div class="form-group">
-	                		<i class="fa fa-lg fa-lock" aria-hidden="true"></i>
-		                	<input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}[^'\x22\s@!]+" title="Chứa ít nhât một số, chữ hoa, chữ thường và dài tối thiểu 4 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
-		                </div>
-		                <div class="form-group">
-	                		<i class="fa fa-lg fa-envelope-o" aria-hidden="true"></i>
-		                	<input type="email" name="email" id="email" placeholder="example@gmail.com" required />
-		                </div>
-		                <input type="submit" value="Register" id="register-btn" class="btn btn-danger btn-lg" />
+				</form>
+				
+			</div>
+			<div class="clearfix"></div>
+		</div>
+	</div>	
 
-		                <div class="row">
-                            <div class="col-md-6 col-xs-6 col-sm-6">
-                            	<a href="<?= base_url?>login" class="transparent pull-left">Have an account</a>
-                           	</div>
-                            <div class="col-md-6 col-xs-6 col-sm-6">
-                            	<a href="<?= base_url?>" class="transparent pull-right">Pass this</a>
-                            </div>		                        
-		                </div>
-		                <div class="row">
-		                	<div class="col-md-12" id="results">
-		                		
-		                	</div>
-		                </div>
-	                </form>
-	            </div>
-	        </div>
-	    </div>
-	    <div class="clearfix"></div>
-	</div>
 </body>
 </html>

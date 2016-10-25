@@ -13,7 +13,6 @@
 	<link rel="stylesheet" href="<?= base_url; ?>assets/css/bootstrap.min.css">
 	<link rel="stylesheet" href="<?= base_url; ?>assets/css/font-awesome.min.css">
 	<link rel="stylesheet" href="<?= base_url; ?>assets/css/login.css">
-
 	<link href="https://fonts.googleapis.com/css?family=Roboto:100,100i,300,300i,400,400i,500,500i,700,700i,900,900i&subset=cyrillic,latin-ext,vietnamese" rel="stylesheet">
 	<script src="<?= base_url; ?>assets/js/jquery-1.11.0.js"></script>
 	<script src="<?= base_url; ?>assets/js/bootstrap.min.js"></script>
@@ -21,49 +20,61 @@
 
 </head>
 <body>
-	<div class="container">
-	    <div class="row">
-	        <div class="col-md-12">
-	            <div class="wrap">
-	                <p class="form-title">
-	                    Login</p>
-	                <form class="login" id="login-form" method="POST" action="<?= base_url . 'login/check_login' ?>" >
-	                	<div class="form-group">
-			                <i class="fa fa-lg fa-user" aria-hidden="true"></i>
-			                <input type="text" name="username" id="username" placeholder="Username or Email" pattern="[A-Za-z_0-9-]{3,15}[^'\x22\s@!]+" title="Chỉ chứa số, chữ hoa, chữ thường, gạch dưới '_', gạch nối '-' dài tối thiểu 3 đến 15 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
-	                	</div>
+	<div id="login-page">
+		<div class="form-login col-md-7 col-sm-9 col-xs-11">
+			<div class="login col-md-6 col-sm-6 col-xs-12">
+				<h1 class="text-center"><b>Login</b></h1>
+				<p class="des text-center"><i>to your account</i></p>
+				<form id="login-form" method="POST" action="<?= base_url . 'login/check_login' ?>" >
 
-	                	<div class="form-group">
-	                		<i class="fa fa-lg fa-lock" aria-hidden="true"></i>
-		                	<input type="password" name="password" id="password" placeholder="Password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}[^'\x22\s@!]+" title="Chứa ít nhât một số, chữ hoa, chữ thường và dài tối thiểu 4 ký tự và không được chứa dấu @, !, ', '' hay khoảng trắng" required />
-		                </div>
-		                <div class="form-group">
-	                        <label for="remember">Remember me </label>
-		                	<div class="material-switch pull-right">
-	                            <input id="remember" name="remember" type="checkbox" value="checked" style="display: none;" />
-	                            <label for="remember" class="label-success"></label>
-	                        </div>
-		                </div>
-		                <input type="submit" value="Login" id="login-btn" class="btn btn-danger btn-lg" />
+					<!-- Username -->
+					<div class="form-group">
+						<label for="username">Userame</label>
+						<input type="text" name="username" id="username" class="form-control"  data-toggle="tooltip" data-placement="top" title="">
+					</div>
 
-		                <div class="row">
-                            <div class="col-md-6 col-xs-6 col-sm-6">
-                            	<a href="<?= base_url?>register" class="transparent pull-left">Register</a>
-                           	</div>
-                            <div class="col-md-6 col-xs-6 col-sm-6">
-                            	<a href="<?= base_url?>" class="transparent pull-right">Pass this</a>
-                            </div>		                        
-		                </div>
-		                <div class="row">
-		                	<div class="col-md-12" id="results">
-		                		
-		                	</div>
-		                </div>
-	                </form>
+					<!-- Password -->
+					<div class="form-group">
+						<label for="password">Password</label>
+						<input type="password" name="password" id="password" class="form-control"  data-toggle="tooltip" data-placement="top" title="">
+					</div>
+
+
+					<!-- Remember me checkbox -->
+					<div class="checkbox">
+					  	<label>
+					  		<input type="checkbox" name="remember" id="remember" value="">Remember me
+					  	</label>
+					</div>
+
+					<!-- Access Token -->
+					<input type="hidden" name="access_token" id="access_token" value="<?php echo $this->data["access_token"]; ?>">
+
+					<input type="submit" id="login-btn" value="LOG IN" class="btn-login">
+				</form>
+				<a href="" class="forgot-pass text-center"><i>Forgot Password?</i></a>
+				<div class="row">
+	            	<div class="col-md-12" id="results">
+	            		
+	            	</div>
 	            </div>
-	        </div>
-	    </div>
-	    <div class="clearfix"></div>
+			</div>
+			<div class="block-or">or</div>
+			<div class="sign-in-social col-md-6 col-sm-6 col-xs-12 text-center">
+				<h1><b>Sign In</b></h1>
+				<p class="des"><i>with one of your social<br>profile</i></p>
+				<div class="list-btn-social">
+					<a href="" class="btn-social"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+					<a href="" class="btn-social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+					<a href="" class="btn-social"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+					<div class="clearfix"></div>
+				</div>
+				<p class="dont-have-account"><i>Don't have account?</i></p>
+				<a href="<?= base_url?>register" class="register-redirect"><i>Register</i></a>
+			</div>
+			<div class="clearfix"></div>
+		</div>
 	</div>
+	
 </body>
 </html>
