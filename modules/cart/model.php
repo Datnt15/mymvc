@@ -4,19 +4,75 @@
 */
 class Cart_model extends Model
 {
-	private $table = 'cart';
+	private $cart = 'cart';
+	private $order = 'order';
 
 	function __construct() {
 		parent::__construct();	
 	}
 
-	public function add_to_cart($data){
-        return $this->db->add_row($data, $this->table);
+	/**
+	 * Adding new item to cart
+	 * @param [array] $data [data array to store]
+	 */
+	public function add_to_cart($data) {
+        return $this->db->add_row($data, $this->cart);
     }
 
-    public function get_cart(){
-        return $this->db->get_table($this->table);
+
+    /**
+     * Getting all items in cart of specifix user
+     * @param int $uid user id
+     * @return [array] [array data returned]
+     */
+    public function get_cart_of($uid) {
+        return $this->db->get_rows($this->cart, array('uid' => $uid, 'stt' => 'pending') );
     }
+
+
+    /**
+     * Get all items in cart
+     * @return [array] [array data returned]
+     */
+    public function get_cart(){
+        return $this->db->get_table($this->cart);
+    }
+
+
+    /**
+     * Update one or more items
+     * @param  [array] $data  [data to update]
+     * @param  [array] $where [condition]
+     * @return [boolean]      [true/false]
+     */
+    public function update_cart($data, $where) {
+    	return $this->db->update( $this->cart, $data, $where );
+    }
+
+
+    /**
+     * Delete one or more items in cart
+     * @param  [array] $where [condition]
+     * @return [boolean]      [true/false]
+     */
+    public function delete_cart($where) {
+    	return $this->db->delete($this->cart, $where);
+    }
+
+
+    /**
+     * Adding new order request
+     * @param  [array] $data [data to store]
+     * @return [boolean]     [true/false]
+     */
+    public function send_order($data){
+    	return $this->db->add_row( $data, $this->order );
+    }
+
+    public function get_order_of($uid){
+    	return $this->db->query("SELECT * FROM `order` JOIN `cart` ON(`order`.cid=`cart`.cid) WHERE `order`.uid=" . $uid);
+    }
+
 
 }
 ?>

@@ -8,14 +8,6 @@ class Login extends Controller
 	function __construct()
 	{
 		parent::__construct(__CLASS__);
-        $this->access_token = md5( uniqid(time(), true) );
-	}
-
-	public function index(){
-        
-        $data = array('access_token' => $this->access_token);
-        $this->load_view('index', $data);
-
         if ( $this->user->is_logged_in() === true ) {
             // Redirect to home page user are already logged in
             
@@ -25,6 +17,14 @@ class Login extends Controller
             </script>
             <?php
         }
+        $this->access_token = md5( uniqid(time(), true) );
+    }
+
+    public function index(){
+        
+        $data = array('access_token' => $this->access_token);
+        $this->load_view('index', $data);
+
         // Neu khong redirect trang thi cap nhat lai access token
         $this->session->set('access_token', $this->access_token) ;
 	}

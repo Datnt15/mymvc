@@ -38,7 +38,7 @@ class Cart extends Controller
     }
 
     public function index(){
-        if( isset($_POST['url']) ){
+        if( isset($_POST['product_url']) ){
             
             $data = array(
                 'url'       => $this->input->post('product_url'),
@@ -71,13 +71,32 @@ class Cart extends Controller
                 header("Location: " . base_url . "cart");
             }
         }
-        $cart = $this->model->get_cart();
+        if ( isset( $_POST['update'] ) ) {
+            $this->model->update_cart( array('quantity' => $this->input->post('quantity') ), array('cid' => $this->input->post('cid') ) );
+        }
+        if ( isset( $_POST['delete'] ) ) {
+            unlink( $this->input->post('img') );
+            $this->model->delete_cart( array('cid' => $this->input->post('cid') ) );
+        }
+        $cart = $this->model->get_cart_of( $this->user->get_id() );
         $this->load_view('cart', $cart);
 
     }
 
     public function orders(){
-        echo "<h1>string</h1>";
+        $uid = $this->user->get_id();
+        if( isset( $_POST['note'] ) ){
+            $cat_items = explode(',',$this->input->post('cat_items'));
+            $note = $this->input->post('note');
+            foreach ($cat_items as $cid) {
+                if ( $this->model->send_order( array( 'cid' => $cid, 'uid' => $uid, 'note' => $note ) ) ){
+                    $this->model->update_cart( array( 'stt' => 'sent'), array( 'cid' => $cid ) );
+                }
+
+            }
+        }
+        
+        $this->load_view('order',$this->model->get_order_of( $uid ));
 
     }
 
@@ -97,7 +116,11 @@ class Cart extends Controller
             $check = $this->validation->check_phone($data['phone'], 'Phone');
             if (!empty($check)) {
                 $this->session->set('message', $check['message']);
-                header("Location: " . base_url . "cart/profile");
+                ?>
+                <script>
+                    window.location.replace($('base').attr('href') + 'cart/profile');
+                </script>
+                <?php
             }
 
             // $check = $this->validation->check_birthday($data['birthday'], 'Birthday');
@@ -108,7 +131,11 @@ class Cart extends Controller
 
             if ( $this->user->is_phone_exist($data['phone'],$uid) > 0) {
                 $this->session->set('message', 'Phone is already exist!');
-                header("Location: " . base_url . "cart/profile");
+                ?>
+                <script>
+                    window.location.replace($('base').attr('href') + 'cart/profile');
+                </script>
+                <?php
             }
 
             if (isset($_POST['address'])) {
@@ -125,12 +152,20 @@ class Cart extends Controller
 
             if ( $user ) {
             	$this->session->set('message', 'Updated');
-                header("Location: " . base_url . "cart/profile");
+                ?>
+                <script>
+                    window.location.replace($('base').attr('href') + 'cart/profile');
+                </script>
+                <?php
             }
             // Thất bại tràn trề
             else {
             	$this->session->set('message', 'Some errors occured!' );
-                header("Location: " . base_url . "cart/profile");
+                ?>
+                <script>
+                    window.location.replace($('base').attr('href') + 'cart/profile');
+                </script>
+                <?php
                 
             }
         }
