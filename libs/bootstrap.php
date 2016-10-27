@@ -39,8 +39,14 @@ class Bootstrap {
 				$controller->index();
 				die;
 			} elseif( isset($url[2]) ) {
-				// method co tham so truyen vao
-				$controller->{$url[1]}($url[2]);
+				if (isset($url[3])) {
+					$controller->{$url[1]}($url[2], $url[3] ) ;
+					# code...
+				}else {
+
+					// method co tham so truyen vao
+					$controller->{$url[1]}($url[2]);
+				}
 			} else {
 				$controller->{$url[1]}();
 			}

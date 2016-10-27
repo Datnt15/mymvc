@@ -27,6 +27,7 @@ class Cart extends Controller
                     <?php echo $message; ?>
                 </div>
             <?php
+            $this->session->set('message', '');
             }
     		$this->load_view('edit-profile', $this->user->get_current_user());
 
@@ -95,7 +96,7 @@ class Cart extends Controller
 
             }
         }
-        
+
         $this->load_view('order',$this->model->get_order_of( $uid ));
 
     }

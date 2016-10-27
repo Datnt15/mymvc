@@ -41,7 +41,6 @@
 				        </span>
 				    </div>
 				</form>
-				
 			</td>
 			<td>
 				<form action="" method="POST">

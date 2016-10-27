@@ -23,6 +23,12 @@
 	<div id="login-page">
 		<div class="form-login col-md-7 col-sm-9 col-xs-11">
 			<div class="login col-md-6 col-sm-6 col-xs-12">
+				<?php if ( isset( $this->data['message'] )): ?>
+					<div class="alert alert-success" style="margin: 20px;">
+	                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+	                    <?php echo $this->data['message']; ?>
+	                </div>
+	            <?php endif; ?>
 				<h1 class="text-center"><b>Login</b></h1>
 				<p class="des text-center"><i>to your account</i></p>
 				<form id="login-form" method="POST" action="<?= base_url . 'login/check_login' ?>" >

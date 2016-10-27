@@ -67,8 +67,15 @@ class Register extends Controller
             if ( $user ) {
             	echo json_encode( array(
             			'stt'        => 'success',
-            			'message'    => 'Register successfuly! Please Login.'
+            			'message'    => 'Register successfuly! Please check your email to activate your account.'
             		) );
+                mail(
+                    // $data['email'], 
+                    "tiendatbt19@gmail.com", 
+                    "Registration Confirm", 
+                    "Please click this link to activate your account:" . "\r\r\t\n"
+                    . base_url . "register/confirm_registration/" . $user . "/" . $data['secret_code']
+                );
             	return false;
             }
             // Thất bại tràn trề
@@ -82,5 +89,16 @@ class Register extends Controller
             }
     	}
 	}
+
+
+    public function confirm_registration( $uid, $secret_code ){
+        if ( !$this->user->is_confirmed( $uid, $secret_code ) ) {
+            sleep(4);
+            $this->user->update_user_info(array('stt' => 'confirmed'), $uid, $secret_code);
+            header( "Location: " . base_url . "/cart/profile" );
+        }else {
+            echo "This user has already confirmed his account!";
+        }
+    }
 
 }

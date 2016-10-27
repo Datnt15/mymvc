@@ -117,7 +117,10 @@ class User
      * @param  [int] 	$uid [User ID]
      * @return [boolean]   	 [Trạng thái thực hiện câu lệnh]
      */
-    public function update_user_info($data, $uid){
+    public function update_user_info($data, $uid, $secret_code = NULL){
+    	if ($secret_code !== NULL) {
+    		return $this->db->update($this->table, $data, array( 'uid' => $uid, 'secret_code' => $secret_code ) );
+    	}
     	return $this->db->update($this->table, $data, array( 'uid' => $uid) );
     }
 	
@@ -238,6 +241,23 @@ class User
 	 */
 	public function get_avatar(){
 		return $this->avatar;
+	}
+
+	/**
+	 * Checking user has confirmed yet?
+	 * @param  [int]  $uid            [user ID]
+	 * @param  [string]  $secret_code [unique string for user]
+	 * @return boolean                [true/false]
+	 */
+	public function is_confirmed($uid, $secret_code){
+		return count( self::get_user( 
+							array(
+									'uid' => $uid, 
+									'secret_code' => $secret_code, 
+									'stt' => 'confirmed'
+								) 
+						) 
+				);
 	}
 
 

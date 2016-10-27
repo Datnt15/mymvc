@@ -23,6 +23,11 @@ class Login extends Controller
     public function index(){
         
         $data = array('access_token' => $this->access_token);
+        $message = $this->session->get('message');
+        if ( $message !== '' ) { 
+            $data['message'] = $message;
+            $this->session->set('message', '');
+        }
         $this->load_view('index', $data);
 
         // Neu khong redirect trang thi cap nhat lai access token
