@@ -778,3 +778,7 @@ button.update:hover{
     border: 1px #f6bb4f solid;
     box-shadow: none;
 }
+
+.pac-container.pac-logo{
+  z-index: 10000;
+}
