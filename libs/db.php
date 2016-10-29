@@ -32,7 +32,7 @@ class Database {
      */
     public function get_table($table_name, $limit = 50) {
 
-        $result = $this->conn->query("SELECT * FROM $table_name LIMIT $limit");
+        $result = $this->conn->query("SELECT * FROM `$table_name` LIMIT $limit");
         $data = array();
 
         // Kiểm tra có kết quả trả về hay không
@@ -107,7 +107,7 @@ class Database {
      */
     public function get_row($table, $where){
 
-        $sql = "SELECT * FROM $table WHERE ";
+        $sql = "SELECT * FROM `$table` WHERE ";
         $i = 0;
         // Xử lý mảng điều kiện
         foreach ($where as $key => $value) {
@@ -148,7 +148,7 @@ class Database {
      */
     public function get_rows($table, $where){
 
-        $sql = "SELECT * FROM $table WHERE ";
+        $sql = "SELECT * FROM `$table` WHERE ";
         $i = 0;
         // Xử lý mảng điều kiện
         foreach ($where as $key => $value) {
@@ -193,7 +193,7 @@ class Database {
      */
     public function count($table, $where){
 
-        $sql = "SELECT count(*) FROM $table WHERE ";
+        $sql = "SELECT count(*) FROM `$table` WHERE ";
         $i = 0;
         // Xử lý mảng điều kiện
         foreach ($where as $key => $value) {
@@ -280,7 +280,7 @@ class Database {
      */
     public function delete($table, $where){
 
-        $sql = "DELETE FROM $table WHERE ";
+        $sql = "DELETE FROM `$table` WHERE ";
         $i = 0;
         // Xử lý điều kiện của SQL
         foreach ($where as $key => $value) {

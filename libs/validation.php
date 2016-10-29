@@ -39,9 +39,9 @@ class Validation {
             $res['stt'] = 'failure';
             $res['message'] = $field_name . ' can\'t be null';
         }
-        elseif ( !preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{4,}[^'\x22\s@!]+$/", $pass) ){
+        elseif ( !preg_match("/^(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}[^'\x22\s!]+$/", $pass) ){
             $res['stt'] = 'failure';
-            $res['message'] = $field_name . " containts at least one number, one upercase, one lowercase, minlength is 4, can't containt some special characters like ( @, !, ', '' ) and whitespace";
+            $res['message'] = $field_name . " containts at least one number, one upercase, one lowercase, minlength is 8, can't containt some special characters like ( !, ', '' ) and whitespace";
             $res['type'] = 'password';
         }
         return $res;

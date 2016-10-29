@@ -12,13 +12,19 @@ class Cookie
         
     }
 
-    public function set($key, $value){
+    public function set($key, $value, $time = NULL){
+        $time = ($time == NULL ) ? 3600*24*30 : intval($time);
+
         $browser = $this->get_browser_name($_SERVER['HTTP_USER_AGENT']);
+
         if ($browser === 'Chrome') {
-            
-        	setcookie($key, $value, time()+3600*24*30, '/', NULL);
+
+        	setcookie($key, $value, time()+$time, '/', NULL);
         }
-        else setcookie($key, $value, time()+3600*24*30, '/');
+        else{
+
+            setcookie($key, $value, time()+$time, '/');
+        } 
     }
 
     public function get($key = ''){

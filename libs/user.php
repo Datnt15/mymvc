@@ -9,11 +9,12 @@ class User
     private $uid;
 	private $username;
 	private $avatar;
+	private $email;
+	private $fullname;
+	private $role;
 	private $cookie;
     private $session;
 	private $db;
-	private $email;
-	private $fullname;
 	private $table = 'users';
     public function __construct()
     {
@@ -28,6 +29,7 @@ class User
         	$this->email 	= $user_data['email'];
         	$this->fullname = $user_data['fullname'];
         	$this->avatar 	= $user_data['avatar'];
+        	$this->role 	= $user_data['role'];
         }
 
         else{
@@ -37,6 +39,7 @@ class User
         	$this->email 	= NULL;
         	$this->fullname = NULL;
         	$this->avatar 	= NULL;
+        	$this->role 	= NULL;
         }
     }
     /**
@@ -244,6 +247,22 @@ class User
 	}
 
 	/**
+	 * [get_role get current user's permission]
+	 * @return string [user avatar]
+	 */
+	public function get_role(){
+		return $this->role;
+	}
+
+	/**
+	 * [get_role get current user's permission]
+	 * @return string [user avatar]
+	 */
+	public function is_admin(){
+		return ($this->role === 'admin') ? true : false;
+	}
+
+	/**
 	 * Checking user has confirmed yet?
 	 * @param  [int]  $uid            [user ID]
 	 * @param  [string]  $secret_code [unique string for user]
@@ -259,6 +278,8 @@ class User
 						) 
 				);
 	}
+
+
 
 
 }

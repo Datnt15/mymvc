@@ -48,7 +48,6 @@ $orders = $this->data;
 			<td>
 				<form action="" method="POST">
 					<input type="hidden" name="oid" value="<?= $order['oid']; ?>">
-					<input type="hidden" name="cid" value="<?= $order['cid']; ?>">
 					<input type="submit" name="delete" class="btn btn-danger" value="Delete">
 				</form>
 			</td>

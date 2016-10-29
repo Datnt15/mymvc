@@ -13,7 +13,7 @@ class Login extends Controller
             
             ?>
             <script>
-                window.location.replace($('base').attr('href'));
+                window.location.replace("<?= base_url ?>cart");
             </script>
             <?php
         }
@@ -105,6 +105,54 @@ class Login extends Controller
             }
     	}
 	}
+
+    public function forgot_pass(){
+
+        if ( isset( $_POST['access_token']) ) {
+            $email = $this->input->post('email');
+            $access_token = $this->input->post('access_token');
+            if ( $this->user->is_email_exist( $email ) ) {
+                if ($access_token == $this->session->get('access_token')) {
+                    $this->cookie->set('mail_access_token', $access_token, 3600);
+                    $this->cookie->set($access_token, base64_encode($email), 3600);
+                    if( mail(
+                        $email, 
+                        "Restting Password", 
+                        "Please click this link to reset your password:\r\r\n" .
+                        base_url . "login/reset_password/" . $access_token . ".\r\r\t\n" .
+                        "This link is valiable in 1 hour only."
+                        ) ) {
+                        echo "Please check your email to reset your password!";
+                    }
+                } 
+                else {
+                    echo "Access token not match";
+                }
+            } else {
+                echo "Email is not exist in our system";
+            }
+        }
+        else {
+            header("Location: " . base_url);
+        }
+    }
+
+    public function reset_password($access_token){
+        if (isset($_POST['reset'])) {
+            if ($this->input->post('access_token') == $this->cookie->get('mail_access_token') ) {
+                $email = base64_decode( $this->cookie->get($this->input->post('access_token')) );
+                $user = $this->user->get_user( array( 'email' => $email ) );
+                $this->user->update_user_info( 
+                    array( 'password' => md5( $this->input->post('password') ) ),
+                    $user['uid'],
+                    $user['secret_code']
+                );
+                echo "Reset password successfuly. Please login again.";
+            }
+        }
+        $this->load_view('reset-pass',$access_token);
+
+    }
 
     
 }

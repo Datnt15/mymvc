@@ -2,85 +2,42 @@
 /**
  * User controller
  */
-class Cart extends Controller
+class Dashboard extends Controller
 {
-	private $model;
+	// private $model;
 	function __construct() {
 
 		parent::__construct(__CLASS__);
         if (!$this->user->is_logged_in()) {
             header("Location: " . base_url . "login");
         }
+        if (!$this->user->is_admin()) {
+            header("Location: " . base_url . "login");
+        }
         $user = $this->user->get_current_user();
         $user['title'] = 'Profile Page';
         $this->load_view('header', $user);
-        $this->model = $this->load_model();
+        // $this->model = $this->load_model();
         
         
 	}
 
     public function profile (){
-    		$message = $this->session->get('message');
-            if (!empty($message)) { ?>
-                <div class="alert alert-success" style="margin: 20px;">
-                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                    <?php echo $message; ?>
-                </div>
-            <?php
-            $this->session->set('message', '');
-            }
-    		$this->load_view('edit-profile', $this->user->get_current_user());
+		$message = $this->session->get('message');
+        if (!empty($message)) { ?>
+            <div class="alert alert-success" style="margin: 20px;">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <?php echo $message; ?>
+            </div>
+        <?php
+        $this->session->set('message', '');
+        }
+		$this->load_view('edit-profile', $this->user->get_current_user());
 
-    	}
-
-    public function add_product(){
-        $this->load_view('add-product');
-
-    }
+	}
 
     public function index(){
-        if( isset($_POST['product_url']) ){
-            
-            $data = array(
-                'url'       => $this->input->post('product_url'),
-                'name'      => $this->input->post('product_name'),
-                'customer'  => $this->input->post('customer'),
-                'phone'     => $this->input->post('phone'),
-                'address'   => $this->input->post('address'),
-                'quantity'  => $this->input->post('quantity'),
-                'uid'       => $this->user->get_id(),
-                );
-            if (isset($_POST['address'])) {
-
-                $res = $this->gallery->upload_img("image");
-                $res = $res[0];
-                if ($res['stt'] === 'success') {
-                    $data['img'] = $res['data'];
-                }
-            }
-                        
-
-            $cid = $this->model->add_to_cart($data);
-
-            if ( $cid ) {
-                $this->session->set('message', 'Adding new product to cart successfuly');
-            }
-            // Thất bại tràn trề
-            else {
-                $this->session->set('message', 'Some errors occured!' );
-                
-                header("Location: " . base_url . "cart");
-            }
-        }
-        if ( isset( $_POST['update'] ) ) {
-            $this->model->update_cart( array('quantity' => $this->input->post('quantity') ), array('cid' => $this->input->post('cid') ) );
-        }
-        if ( isset( $_POST['delete'] ) ) {
-            unlink( $this->input->post('img') );
-            $this->model->delete_cart( array('cid' => $this->input->post('cid') ) );
-        }
-        $cart = $this->model->get_cart_of( $this->user->get_id() );
-        $this->load_view('cart', $cart);
+        echo "Dashboard page";
 
     }
 
@@ -94,14 +51,6 @@ class Cart extends Controller
                     $this->model->update_cart( array( 'stt' => 'sent'), array( 'cid' => $cid ) );
                 }
 
-            }
-        }
-        if( isset( $_POST['delete'] ) ){
-            if ( $this->model->delete_order( array( 'oid' => $this->input->post('oid') ) ) ){
-                $this->model->update_cart( 
-                    array( 'stt' => 'pending'), 
-                    array( 'cid' => $this->input->post('cid') ) 
-                );
             }
         }
 
@@ -132,11 +81,6 @@ class Cart extends Controller
                 <?php
             }
 
-            // $check = $this->validation->check_birthday($data['birthday'], 'Birthday');
-            // if (!empty($check)) {
-            //     echo json_encode($check);
-            //     return false;
-            // }
 
             if ( $this->user->is_phone_exist($data['phone'],$uid) > 0) {
                 $this->session->set('message', 'Phone is already exist!');

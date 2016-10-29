@@ -31,11 +31,12 @@
 	            <?php endif; ?>
 				<h1 class="text-center"><b>Login</b></h1>
 				<p class="des text-center"><i>to your account</i></p>
+				<input type="checkbox" class="hidden" id="toggle-form" name="toggle-form">
 				<form id="login-form" method="POST" action="<?= base_url . 'login/check_login' ?>" >
 
 					<!-- Username -->
 					<div class="form-group">
-						<label for="username">Userame</label>
+						<label for="username">Username</label>
 						<input type="text" name="username" id="username" class="form-control"  data-toggle="tooltip" data-placement="top" title="">
 					</div>
 
@@ -58,7 +59,24 @@
 
 					<input type="submit" id="login-btn" value="LOG IN" class="btn-login">
 				</form>
-				<a href="" class="forgot-pass text-center"><i>Forgot Password?</i></a>
+				
+				
+	            <form id="forgot-pass-form" method="POST" action="<?= base_url;?>login/forgot_pass" >
+
+					<!-- Username -->
+					<div class="form-group">
+						<label for="email">Your Email</label>
+						<input type="email" name="email" id="email" class="form-control"  data-toggle="tooltip" data-placement="top" title="">
+					</div>
+					<!-- Access Token -->
+					<input type="hidden" name="access_token" id="access_token" value="<?php echo $this->data["access_token"]; ?>">
+					<input type="submit" value="Send me" class="btn-login">
+
+				</form>
+				
+				<label for="toggle-form" class="forgot-pass text-center">
+					<i>Forgot Password?</i>
+				</label>
 				<div class="row">
 	            	<div class="col-md-12" id="results">
 	            		
@@ -70,9 +88,15 @@
 				<h1><b>Sign In</b></h1>
 				<p class="des"><i>with one of your social<br>profile</i></p>
 				<div class="list-btn-social">
-					<a href="" class="btn-social"><i class="fa fa-twitter" aria-hidden="true"></i></a>
-					<a href="" class="btn-social"><i class="fa fa-facebook" aria-hidden="true"></i></a>
-					<a href="" class="btn-social"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+					<a href="" class="btn-social">
+						<i class="fa fa-twitter" aria-hidden="true"></i>
+					</a>
+					<a href="" class="btn-social">
+						<i class="fa fa-facebook" aria-hidden="true"></i>
+					</a>
+					<a href="" class="btn-social">
+						<i class="fa fa-google-plus" aria-hidden="true"></i>
+					</a>
 					<div class="clearfix"></div>
 				</div>
 				<p class="dont-have-account"><i>Don't have account?</i></p>
