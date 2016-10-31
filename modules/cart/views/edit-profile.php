@@ -1,7 +1,7 @@
 
 <div class="profile">
 	<img <?php if ($this->data['avatar'] == NULL){
-			echo 'src="'.base_url.'assets/images/default-avatar.png"';}
+			echo 'src="'.BASE_URL.'assets/images/default-avatar.png"';}
 			else {echo 'src="'.$this->data['avatar'].'"';}?>>
 	<div class="about-me">
 		<h1 class="name-pro"><b><?php echo $this->data['username'];?></b></h1>
@@ -24,7 +24,7 @@
 		<a href="" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 		<!-- link log out -->
-		<a href="<?= base_url;?>logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+		<a href="<?= BASE_URL;?>logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 		<div class="clearfix"></div>
 	</div>
 </div>
@@ -64,13 +64,13 @@
 </div>
 
 <!-- Profile form -->
-<form method="POST" action="<?= base_url . 'cart/update_user_info' ?>" enctype="multipart/form-data">
+<form method="POST" action="<?= BASE_URL . 'cart/update_user_info' ?>" enctype="multipart/form-data">
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 	    <div class="modal-dialog">
 			<div class="editmodal-container">
-				<img src="<?= base_url; ?>assets/images/background-login.jpg" class="background-edit">
+				<img src="<?= BASE_URL; ?>assets/images/background-login.jpg" class="background-edit">
 				<img <?php if ($this->data['avatar'] == NULL){
-	  					echo 'src="'.base_url.'assets/images/default-avatar.png"';}
+	  					echo 'src="'.BASE_URL.'assets/images/default-avatar.png"';}
 	  					else {echo 'src="'.$this->data['avatar'].'"';}?> 
 	  					class="edit-avatar">
 
@@ -85,26 +85,26 @@
 
 					<!-- Phone -->
 					<div class="form-group">
-						<label for="phone">Phone</label>
+						<label for="phone">Số điện thoại</label>
 						<input type="text" name="phone" class="form-control" id="phone" value="<?php echo $this->data['phone'];?>">
 					</div>
 
 					<!-- Address -->
 					<div class="form-group">
-						<label for="address">Address</label>
+						<label for="address">Địa chỉ</label>
 						<input type="text" name="address" class="form-control" id="address" value="<?php echo $this->data['address'];?>">
 					</div>
 
 					<!-- Birthday -->
 					<div class="form-group">
-						<label for="birthday">Birthday</label>
+						<label for="birthday">Ngày sinh</label>
 						<input type="text" name="birthday" class="form-control" id="birthday" 
 						value="<?php if($this->data['birthday'] == '0000-00-00'){ echo 'yyyy-mm-dd';} else echo $this->data['birthday'];?>">
 					</div>
 				</div>
 
 				<!-- Submit button -->
-				<button class="update" type="submit">UPDATE</button>
+				<button class="update" type="submit">Cập nhật</button>
 				
 			    
 			</div>

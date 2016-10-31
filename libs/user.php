@@ -12,6 +12,7 @@ class User
 	private $email;
 	private $fullname;
 	private $role;
+	private $stt;
 	private $cookie;
     private $session;
 	private $db;
@@ -30,6 +31,7 @@ class User
         	$this->fullname = $user_data['fullname'];
         	$this->avatar 	= $user_data['avatar'];
         	$this->role 	= $user_data['role'];
+        	$this->stt 		= $user_data['stt'];
         }
 
         else{
@@ -268,17 +270,21 @@ class User
 	 * @param  [string]  $secret_code [unique string for user]
 	 * @return boolean                [true/false]
 	 */
-	public function is_confirmed($uid, $secret_code){
-		return count( self::get_user( 
-							array(
-									'uid' => $uid, 
-									'secret_code' => $secret_code, 
-									'stt' => 'confirmed'
-								) 
-						) 
-				);
-	}
+	public function is_confirmed($uid = 0, $secret_code = NULL){
+		if($uid != 0 && $secret_code != NULL){
 
+			return count( self::get_user( 
+								array(
+										'uid' => $uid, 
+										'secret_code' => $secret_code, 
+										'stt' => 'confirmed'
+									) 
+							) 
+					);
+		}else {
+			return ($this->stt == 'confirmed') ? true : false;
+		}
+	}
 
 
 

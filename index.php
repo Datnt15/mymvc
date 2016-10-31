@@ -1,6 +1,6 @@
 <?php
 // Define base url
-define('base_url', 'http://nguyendangdungha.com/mymvc/');
+define('BASE_URL', 'http://nguyendangdungha.com/mymvc/');
 session_start();
 
 require 'libs/bootstrap.php';

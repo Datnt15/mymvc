@@ -67,7 +67,7 @@ class Gallery
             $uploadOk = 1;
         } else {
             $respons['stt'] = 'failure';
-            $respons['message'] = "This is not an image";
+            $respons['message'] = "Đây không phải là ảnh";
             $uploadOk = 0;
         }
 
@@ -76,15 +76,23 @@ class Gallery
         // File quá là lớn > 5MB = 5242880 bites
         if ($file["size"] > 5242880) {
             $respons['stt'] = 'failure';
-            $respons['message'] = "This image is too large.";
+            $respons['message'] = "Ảnh tải lên lớn hơn 5MB.";
             $uploadOk = 0;
         }
+
+        // Check if file already exists
+        // File đã tồn tại
+        // if (file_exists($target_file)) {
+        //     $respons['stt'] = 'failure';
+        //     $respons['message'] = "This image has already existed.";
+        //     $uploadOk = 0;
+        // }
         // Allow certain file formats
         // Các định dạng cho phép (Chỉ ảnh thôi na cưng)
         $fileTypeAllow = array("jpg","png","jpeg","gif","tiff","ico","JPG","TIFF","PNG","JPEG","GIF","ICO");
         if( !in_array( strtolower($imageFileType), $fileTypeAllow ) ) {
             $respons['stt'] = 'failure';
-            $respons['message'] = "These format JPG, JPEG, PNG & GIF allowed.";
+            $respons['message'] = "Chỉ chấp nhận các file có định dạng JPG, JPEG, PNG & GIF.";
             $uploadOk = 0;
         }
         
@@ -92,7 +100,7 @@ class Gallery
             // move_uploaded_file: Upload ảnh từ local (từ máy tính của ông í) lên server
             if (move_uploaded_file($file["tmp_name"], $target_file)) {
                 $respons['stt'] = 'success';
-                $respons['message'] = "Successfuly, uploaded";
+                $respons['message'] = "Tải lên thành công.";
                 $respons['data'] = $target_file;
 
             } 
@@ -101,7 +109,7 @@ class Gallery
             else {
 
                 $respons['stt'] = 'failure';
-                $respons['message'] = "Some errors ouccured";
+                $respons['message'] = "Đã có lỗi xảy ra.";
             }
         }
         // trả về dữ liệu

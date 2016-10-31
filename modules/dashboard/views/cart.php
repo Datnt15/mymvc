@@ -70,7 +70,7 @@
 
 </table>
 
-<form action="<?= base_url;?>cart/orders" method="POST" id="send_order_form">
+<form action="<?= BASE_URL;?>cart/orders" method="POST" id="send_order_form">
 	<input type="hidden" name="cat_items">
 	<!-- Textarea -->
 	<div class="form-group">

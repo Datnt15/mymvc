@@ -12,21 +12,21 @@ class Index extends Controller
             
             ?>
             <script>
-                window.location.replace("<?= base_url ?>cart");
+                window.location.replace("<?= BASE_URL ?>cart");
             </script>
             <?php
         }
         else {
         	?>
             <script>
-                window.location.replace("<?= base_url ?>login");
+                window.location.replace("<?= BASE_URL ?>login");
             </script>
             <?php
         }
 	}
 
 	function index(){
-		echo "index page";
+		echo "Trang chủ";
 	}
 	
 }

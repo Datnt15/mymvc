@@ -38,15 +38,35 @@ class Cart_model extends Model
         return $this->db->get_table($this->cart);
     }
 
+    /**
+     * Get specifix item in cart
+     * @param   $cid [Cart item ID]
+     * @return [array] [array data returned]
+     */
+    public function get_specifix_cart($cid){
+        return $this->db->get_row( $this->cart, array( 'cid' => $cid ) );
+    }
+
 
     /**
-     * Update one or more items
+     * Update one or more items in cart table
      * @param  [array] $data  [data to update]
      * @param  [array] $where [condition]
      * @return [boolean]      [true/false]
      */
     public function update_cart($data, $where) {
-    	return $this->db->update( $this->cart, $data, $where );
+        return $this->db->update( $this->cart, $data, $where );
+    }
+
+
+    /**
+     * Update one or more items in order table
+     * @param  [array] $data  [data to update]
+     * @param  [array] $where [condition]
+     * @return [boolean]      [true/false]
+     */
+    public function update_order($data, $where) {
+    	return $this->db->update( $this->order, $data, $where );
     }
 
 

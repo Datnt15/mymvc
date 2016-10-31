@@ -2,17 +2,17 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<base href="<?= base_url;?>">
+	<base href="<?= BASE_URL;?>">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="profile" href="http://gmpg.org/xfn/11">
 	<title><?php echo $this->data['title'] ?></title>
-	<link rel="stylesheet" href="<?= base_url; ?>assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="<?= base_url; ?>assets/css/font-awesome.min.css">
-    <link rel="stylesheet" href="<?= base_url; ?>assets/css/dashboard.css">
-    <script type="text/javascript" src="<?= base_url; ?>assets/js/jquery.min.js"></script>
-    <script type="text/javascript" src="<?= base_url; ?>assets/bootstrap/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="<?= base_url; ?>assets/js/main.js"></script>
+	<link rel="stylesheet" href="<?= BASE_URL; ?>assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL; ?>assets/css/font-awesome.min.css">
+    <link rel="stylesheet" href="<?= BASE_URL; ?>assets/css/dashboard.css">
+    <script type="text/javascript" src="<?= BASE_URL; ?>assets/js/jquery.min.js"></script>
+    <script type="text/javascript" src="<?= BASE_URL; ?>assets/bootstrap/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="<?= BASE_URL; ?>assets/js/main.js"></script>
 	
 </head>
 <body>
@@ -21,7 +21,7 @@
 	<div id="nav">
 	  	<div class="user-banner">
 	  		<img <?php if ($this->data['avatar'] == NULL)
-	  				echo 'src="'.base_url.'assets/images/default-avatar.png"';
+	  				echo 'src="'.BASE_URL.'assets/images/default-avatar.png"';
 	  			else 
 	  				echo 'src="'.$this->data['avatar'].'"';?>/>
 	    	<h5 class="username">
@@ -30,33 +30,33 @@
 		</div>
 	  	<ul>
 		    <li class="<?= ($page == 'profile') ? 'active' : NULL ?>">
-		    	<a href="<?= base_url;?>cart/profile">
+		    	<a href="<?= BASE_URL;?>cart/profile">
 		    		<i class="fa fa-home" aria-hidden="true"></i>
-		    		<span>Profile</span>
+		    		<span>Hồ sơ</span>
 		    	</a>
 		    </li>
 		    <li class="<?= ($page == 'add_product') ? 'active' : NULL ?>">
-		    	<a href="<?= base_url;?>cart/add_product">
+		    	<a href="<?= BASE_URL;?>cart/add_product">
 			    	<i class="fa fa-cart-plus" aria-hidden="true"></i>
-			    	<span class="swatch light-grey">Add product</span>
+			    	<span class="swatch light-grey">Thêm sản phẩm</span>
 		    	</a>
 	    	</li>
 		    <li class="<?= ($page == 'cart' || $page == '') ? 'active' : NULL ?>">
-		    	<a href="<?= base_url;?>cart">
+		    	<a href="<?= BASE_URL;?>cart">
 		    		<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-		    		<span>Cart</span>
+		    		<span>Giỏ hàng</span>
 		    	</a>
 		    </li>
 		    <li class="<?= ($page == 'orders') ? 'active' : NULL ?>">
-		    	<a href="<?= base_url;?>cart/orders">
+		    	<a href="<?= BASE_URL;?>cart/orders">
 		    		<i class="fa fa-list-alt" aria-hidden="true"></i>
-		    		<span>Orders</span>
+		    		<span>Đơn hàng</span>
 	    		</a>
 			</li>
 		    <li class="<?= ($page == 'history') ? 'active' : NULL ?>">
-		    	<a href="<?= base_url;?>cart/history">
+		    	<a href="<?= BASE_URL;?>cart/history">
 		    		<i class="fa fa-rss" aria-hidden="true"></i>
-		    		<span>Order History</span>
+		    		<span>Lịch sử</span>
 		    	</a>
 		    </li>
 	  	</ul>
@@ -76,7 +76,7 @@
 			    </button>
 			    <div class="clearfix"></div>
 			</div>
-		    <img src="<?= base_url; ?>assets/images/logo.png" class="logo-dashboard">
+		    <img src="<?= BASE_URL; ?>assets/images/logo.png" class="logo-dashboard">
 		</header>
 		<!-- Main Content -->
 		<div id="content">

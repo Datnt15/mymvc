@@ -1,13 +1,16 @@
 <script>
 	// autocomplete address
-    function initAutoComplete() { 
+    function initAutoComplete() {
+      var options = {
+        componentRestrictions: {country: 'vn'}
+      }; 
     	if ($("#address").length > 0) {
-	      	new google.maps.places.Autocomplete(document.getElementById('address'));
+	      	new google.maps.places.Autocomplete(document.getElementById('address'), options);
     	}
       	if ($(".address-input").length > 0){
       		var input = document.getElementsByClassName('address-input');
       		for (var i = 0; i < input.length; i++) {
-      			new google.maps.places.Autocomplete(input[i]);
+      			new google.maps.places.Autocomplete(input[i], options);
       		}
       	}
 

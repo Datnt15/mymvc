@@ -13,7 +13,7 @@ class Login extends Controller
             
             ?>
             <script>
-                window.location.replace("<?= base_url ?>cart");
+                window.location.replace("<?= BASE_URL ?>cart");
             </script>
             <?php
         }
@@ -62,7 +62,7 @@ class Login extends Controller
                 echo json_encode(
                         array(
                             'stt' => 'failure',
-                            'message' => 'Access Token is not match! Please reload this page!'
+                            'message' => 'Access Token không khớp! Vui lòng tải lại trang!'
                         )
                     );
                 return false;
@@ -88,7 +88,7 @@ class Login extends Controller
             	echo json_encode( 
             		array(
             			'stt' => 'success',
-            			'message' => 'Login successfuly!'
+            			'message' => 'Đăng nhập thành công!'
             		) 
             	);
 
@@ -98,7 +98,7 @@ class Login extends Controller
             else {
             	echo json_encode( array(
 	            		'stt'        => 'failure',
-            			'message'    => "Wrong Password or Username!",
+            			'message'    => "Tên đăng nhập hoặc mật khẩu không đúng!",
                         'type'       => 'username'
             		) );
             	return false;
@@ -117,23 +117,23 @@ class Login extends Controller
                     $this->cookie->set($access_token, base64_encode($email), 3600);
                     if( mail(
                         $email, 
-                        "Restting Password", 
-                        "Please click this link to reset your password:\r\r\n" .
-                        base_url . "login/reset_password/" . $access_token . ".\r\r\t\n" .
-                        "This link is valiable in 1 hour only."
+                        "CẬP NHẬT MẬT KHẨU", 
+                        "Vui lòng truy cập vào đường link sau để cập nhật mật khẩu:\r\r\n" .
+                        BASE_URL . "login/reset_password/" . $access_token . ".\r\r\t\n" .
+                        "Đường link chỉ tại trong vòng 1 giờ."
                         ) ) {
-                        echo "Please check your email to reset your password!";
+                        echo "Vui lòng kiểm tra email để cập nhật mật khẩu!";
                     }
                 } 
                 else {
-                    echo "Access token not match";
+                    echo "Access token không khớp";
                 }
             } else {
-                echo "Email is not exist in our system";
+                echo "Email không tồn tại trong hệ thống";
             }
         }
         else {
-            header("Location: " . base_url);
+            header("Location: " . BASE_URL);
         }
     }
 
@@ -147,7 +147,7 @@ class Login extends Controller
                     $user['uid'],
                     $user['secret_code']
                 );
-                echo "Reset password successfuly. Please login again.";
+                echo "Cập nhật mật khẩu thành công. Vui lòng đăng nhập lại!";
             }
         }
         $this->load_view('reset-pass',$access_token);

@@ -1,7 +1,7 @@
 
 <div class="profile">
 	<img <?php if ($this->data['avatar'] == NULL){
-			echo 'src="'.base_url.'assets/images/default-avatar.png"';}
+			echo 'src="'.BASE_URL.'assets/images/default-avatar.png"';}
 			else {echo 'src="'.$this->data['avatar'].'"';}?>>
 	<div class="about-me">
 		<h1 class="name-pro"><b><?php echo $this->data['username'];?></b></h1>
@@ -24,7 +24,7 @@
 		<a href="" data-toggle="modal" data-target="#edit-modal"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 
 		<!-- link log out -->
-		<a href="<?= base_url;?>logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
+		<a href="<?= BASE_URL;?>logout"><i class="fa fa-sign-out" aria-hidden="true"></i></a>
 		<div class="clearfix"></div>
 	</div>
 </div>
@@ -64,13 +64,13 @@
 </div>
 
 <!-- Profile form -->
-<form method="POST" action="<?= base_url . 'cart/update_user_info' ?>" enctype="multipart/form-data">
+<form method="POST" action="<?= BASE_URL . 'cart/update_user_info' ?>" enctype="multipart/form-data">
     <div class="modal fade" id="edit-modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="display: none;">
 	    <div class="modal-dialog">
 			<div class="editmodal-container">
-				<img src="<?= base_url; ?>assets/images/background-login.jpg" class="background-edit">
+				<img src="<?= BASE_URL; ?>assets/images/background-login.jpg" class="background-edit">
 				<img <?php if ($this->data['avatar'] == NULL){
-	  					echo 'src="'.base_url.'assets/images/default-avatar.png"';}
+	  					echo 'src="'.BASE_URL.'assets/images/default-avatar.png"';}
 	  					else {echo 'src="'.$this->data['avatar'].'"';}?> 
 	  					class="edit-avatar">
 

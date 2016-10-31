@@ -45,7 +45,7 @@ class Register extends Controller
             if ($this->user->is_username_exist($data['username'])) {
                 echo json_encode(array(
                 		'stt'        => 'faild',
-            			'message'    => 'Username is already exist!',
+            			'message'    => 'Tên đăng nhập đã tồn tại!',
                         'type'       => 'username'
                 	));
                 return false;
@@ -54,7 +54,7 @@ class Register extends Controller
             if ($this->user->is_email_exist($data['email'])) {
                 echo json_encode(array(
                 		'stt'        => 'faild',
-            			'message'    => 'Email is already exist!',
+            			'message'    => 'Email đã tồn tại!',
                         'type'       => 'email'
                 	));
                 return false;
@@ -67,14 +67,13 @@ class Register extends Controller
             if ( $user ) {
             	echo json_encode( array(
             			'stt'        => 'success',
-            			'message'    => 'Register successfuly! Please check your email to activate your account.'
+            			'message'    => 'Đăng ký thành công! Vui lòng kiểm tra email để kích hoạt tài khoản.'
             		) );
                 mail(
-                    // $data['email'], 
-                    "tiendatbt19@gmail.com", 
-                    "Registration Confirm", 
-                    "Please click this link to activate your account:" . "\r\r\t\n"
-                    . base_url . "register/confirm_registration/" . $user . "/" . $data['secret_code']
+                    $data['email'], 
+                    "KÍCH HOẠT TÀI KHOẢN", 
+                    "Vui lòng truy cập vào đường link này để kích hoạt tài khoản của bạn:" . "\r\r\t\n"
+                    . BASE_URL . "register/confirm_registration/" . $user . "/" . $data['secret_code']
                 );
             	return false;
             }
@@ -82,7 +81,7 @@ class Register extends Controller
             else {
             	echo json_encode( array(
 	            		'stt'        => 'faild',
-            			'message'    => 'Some errors occured!',
+            			'message'    => 'Đã có lỗi xảy ra!',
                         'type'       => 'username'
             		) );
             	return false;
@@ -95,9 +94,9 @@ class Register extends Controller
         if ( !$this->user->is_confirmed( $uid, $secret_code ) ) {
             sleep(4);
             $this->user->update_user_info(array('stt' => 'confirmed'), $uid, $secret_code);
-            header( "Location: " . base_url . "/cart/profile" );
+            header( "Location: " . BASE_URL . "/cart/profile" );
         }else {
-            echo "This user has already confirmed his account!";
+            echo "Tài khoản đã kích hoạt thành công!";
         }
     }
 

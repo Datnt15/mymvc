@@ -1,47 +1,39 @@
 <?php 
 /**
- * User controller
+ * Admin controller
  */
 class Dashboard extends Controller
 {
-	// private $model;
-	function __construct() {
+    private $model;
+    function __construct() {
 
-		parent::__construct(__CLASS__);
+        parent::__construct(__CLASS__);
         if (!$this->user->is_logged_in()) {
-            header("Location: " . base_url . "login");
+            header("Location: " . BASE_URL . "login");
         }
         if (!$this->user->is_admin()) {
-            header("Location: " . base_url . "login");
+            header("Location: " . BASE_URL . "login");
         }
-        $user = $this->user->get_current_user();
-        $user['title'] = 'Profile Page';
-        $this->load_view('header', $user);
         // $this->model = $this->load_model();
         
-        
-	}
-
-    public function profile (){
-		$message = $this->session->get('message');
-        if (!empty($message)) { ?>
-            <div class="alert alert-success" style="margin: 20px;">
-                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
-                <?php echo $message; ?>
-            </div>
-        <?php
-        $this->session->set('message', '');
-        }
-		$this->load_view('edit-profile', $this->user->get_current_user());
-
-	}
-
-    public function index(){
-        echo "Dashboard page";
-
     }
 
+    private function load_header($title = 'Profile Page'){
+        $user = $this->user->get_current_user();
+        $user['title'] = $title;
+        $this->load_view('header', $user);
+    }
+
+    
+
+    public function index(){
+        $this->load_header("Cart");
+        $this->load_view('cart', $cart);
+        $this->load_footer();
+    }
+    
     public function orders(){
+        $this->load_header("Manage your orders");
         $uid = $this->user->get_id();
         if( isset( $_POST['note'] ) ){
             $cat_items = explode(',',$this->input->post('cat_items'));
@@ -53,78 +45,20 @@ class Dashboard extends Controller
 
             }
         }
-
-        $this->load_view('order',$this->model->get_order_of( $uid ));
-
-    }
-
-
-	public function update_user_info(){
-		if( isset($_POST) ){
-			
-			$data = array(
-				'phone' 		=> $this->input->post('phone'),
-				'address' 		=> $this->input->post('address'),
-				'birthday'    	=> $this->input->post('birthday'),
-            	);
-			
-
-            $uid = $this->user->get_id();
-                        
-            $check = $this->validation->check_phone($data['phone'], 'Phone');
-            if (!empty($check)) {
-                $this->session->set('message', $check['message']);
-                ?>
-                <script>
-                    window.location.replace($('base').attr('href') + 'cart/profile');
-                </script>
-                <?php
-            }
-
-
-            if ( $this->user->is_phone_exist($data['phone'],$uid) > 0) {
-                $this->session->set('message', 'Phone is already exist!');
-                ?>
-                <script>
-                    window.location.replace($('base').attr('href') + 'cart/profile');
-                </script>
-                <?php
-            }
-
-            if (isset($_POST['address'])) {
-
-                $res = $this->gallery->upload_img("avatar");
-                $res = $res[0];
-                if ($res['stt'] === 'success') {
-                    $this->gallery->delete_img( $this->user->get_avatar() );
-                    $data['avatar'] = $res['data'];
-                }
-            }
-            
-            $user = $this->user->update_user_info($data, $uid);
-
-            if ( $user ) {
-            	$this->session->set('message', 'Updated');
-                ?>
-                <script>
-                    window.location.replace($('base').attr('href') + 'cart/profile');
-                </script>
-                <?php
-            }
-            // Thất bại tràn trề
-            else {
-            	$this->session->set('message', 'Some errors occured!' );
-                ?>
-                <script>
-                    window.location.replace($('base').attr('href') + 'cart/profile');
-                </script>
-                <?php
-                
+        if( isset( $_POST['delete'] ) ){
+            if ( $this->model->delete_order( array( 'oid' => $this->input->post('oid') ) ) ){
+                $this->model->update_cart( 
+                    array( 'stt' => 'pending'), 
+                    array( 'cid' => $this->input->post('cid') ) 
+                );
             }
         }
-	}
 
-    public function __destruct(){
+        $this->load_view('order',$this->model->get_order_of( $uid ));
+        $this->load_footer();
+    }
+
+    private function load_footer(){
         $this->load_view('footer');
     }
 }
