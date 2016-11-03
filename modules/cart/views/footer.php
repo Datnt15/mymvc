@@ -1,3 +1,6 @@
+  
+  </div>
+</div>
 <script>
 	// autocomplete address
     function initAutoComplete() {
@@ -19,8 +22,6 @@
     }
 </script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyA5K8HOZwRPnmXdn66HmC_ecn-zqTNv3bY&libraries=places&callback=initAutoComplete" async defer></script>
-
-</div></div>
 </body>
 
 </html>

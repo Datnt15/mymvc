@@ -65,13 +65,85 @@
 		<!-- Header -->
 		<header>
 		  	<div class="noti">
-		  		<a href=""><i class="fa fa-user" aria-hidden="true"></i></a>
-		  		<a href=""><i class="fa fa-commenting-o" aria-hidden="true"></i></a>
-		  		<a href=""><i class="fa fa-bell-o" aria-hidden="true"></i><span class="new-noti">2</span></a>
+		  		<a href="">
+		  			<i class="fa fa-user" aria-hidden="true"></i>
+		  		</a>
+		  		<a href="">
+		  			<i class="fa fa-commenting-o" aria-hidden="true"></i>
+		  		</a>
+		  		<a href="">
+		  			<i class="fa fa-bell-o" aria-hidden="true"></i>
+		  			<span class="new-noti">2</span>
+		  		</a>
+		  		<button href="#cart-popover" data-toggle="popover" data-placement="bottom">
+		  			<i class="fa fa-shopping-cart" aria-hidden="true"></i>
+		  			<span class="new-noti">
+		  				<?= count($this->data['number_cart']);?>
+	  				</span>
+		  		</button>
+		  		<button href="#order-popover" data-toggle="popover" data-placement="bottom">
+		  			<i class="fa fa-list-alt" aria-hidden="true"></i>
+		  			<span class="new-noti">
+		  				<?= count($this->data['number_order']);?>
+	  				</span>
+		  		</button>
+
+		  		<!-- Popover Cart content -->
+				<div id="cart-popover" class="hidden">
+					<table class="table">
+					<?php foreach ($this->data['number_cart'] as $cart): ?>
+						<tr>
+							<td>
+								<img width="60" height="60" src="<?= $cart['img']; ?>" alt="<?= $cart['name'] ?>">
+							</td>
+							<td>
+								<a href="<?= $cart['url']?>">
+									<?php echo implode( ' ', array_slice( preg_split( '/(?<!^)(?!$)/u', $cart['name'], 7, PREG_SPLIT_DELIM_CAPTURE ), 0, 6 ) ); ?> ...
+								</a>
+							</td>
+							<!-- <td>
+								<form action="" method="POST">
+									<input type="hidden" name="cid" value="<?= $cart['cid']; ?>">
+									<input type="hidden" name="image" value="<?= $cart['img']; ?>">
+									<button type="submit" name="delete" class="btn btn-danger" >
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+									</button>
+								</form>
+							</td> -->
+						</tr>
+					<?php endforeach; ?>
+					</table>
+				</div>
+
+				<!-- Popover Order content -->
+				<div id="order-popover" class="hidden">
+					<table class="table">
+					<?php foreach ($this->data['number_order'] as $order): ?>
+						<tr>
+							<td>
+								<img width="60" height="60" src="<?= $order['img']; ?>" alt="<?= $order['name'] ?>">
+							</td>
+							<td>
+								<a href="<?= $order['url']?>">
+									<?php echo implode( ' ', array_slice( preg_split( '/(?<!^)(?!$)/u', $order['name'], 7, PREG_SPLIT_DELIM_CAPTURE ), 0, 6 ) ); ?> ...
+								</a>
+							</td>
+							<!-- <td>
+								<form action="" method="POST">
+									<input type="hidden" name="cid" value="<?= $order['oid']; ?>">
+									<button type="submit" name="delete" class="btn btn-danger" >
+										<i class="fa fa-trash-o" aria-hidden="true"></i>
+									</button>
+								</form>
+							</td> -->
+						</tr>
+					<?php endforeach; ?>
+					</table>
+				</div>
 		  	</div>
 		  	<div class="search">
-			    <input type="text" class="searchTerm" placeholder="Type of search">
-			    <button type="submit" class="searchButton">
+			    <input type="text" id="search_key" class="searchTerm" placeholder="Type of search">
+			    <button id="cart_search" class="searchButton">
 			        <i class="fa fa-search"></i>
 			    </button>
 			    <div class="clearfix"></div>

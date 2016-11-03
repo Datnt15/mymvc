@@ -66,12 +66,12 @@ class Database {
             }
             return $data;
         }
-        elseif($result !== false && $result->num_rows < 1){
-            // Chỉ thực hiện lệnh bình thường
-            return true;
-        }
-        // Lỗi
-        return false;
+        // elseif($result !== false && $result->num_rows < 1){
+        //     // Chỉ thực hiện lệnh bình thường
+        //     return true;
+        // }
+        // // Lỗi
+        // return false;
 
     }
 

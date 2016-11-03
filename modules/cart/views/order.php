@@ -7,11 +7,12 @@ $orders = $this->data;
 	<thead>
 		<th>Ảnh</th>
 		<th width="200">Tên sản phẩm</th>
-		<th width="150">Người nhận</th>
-		<th>Số điện thoại</th>
-		<th>Địa chỉ</th>
+		<th width="100">Người nhận</th>
+		<th width="120">Số điện thoại</th>
+		<th width="150">Địa chỉ</th>
 		<th>Chú thích</th>
 		<th>Số lượng</th>
+		<th>Trạng thái</th>
 		<th width="120">Hành động</th>
 	</thead>
 	<tbody id="edit-table">
@@ -80,6 +81,43 @@ $orders = $this->data;
 				<div class="form-group hidden">
 					<input type="text" name="quantity" class="form-control" value="<?= $order['quantity']; ?>">
 				</div>				
+			</td>
+			<td>
+				<span">
+					<?php
+					$stt = ''; 
+					/**
+					 * Có các trạng thái của đơn hàng là
+					 * pending: Đang đợi nhân viên bán hàng duyệt và báo giá
+					 * confirm: Đã duyệt và báo giá, chờ đặt cọc
+					 * milestoned: Đã đặt cọc.
+					 * shipping: Đang chuyển hàng
+					 * paid: đã thanh toán và hoàn tất đơn hàng
+					 */
+					switch ($order['status']) {
+						case 'pending':
+							$stt = 'Đang đợi duyệt';
+							break;
+
+						case 'confirm':
+							$stt = 'Đang đợi đặt cọc';
+							break;
+
+						case 'milestoned':
+							$stt = 'Đã đặt cọc';
+							break;
+						
+						case 'shipping':
+							$stt = 'Đang chuyển hàng';
+							break;
+
+						case 'paid':
+							$stt = 'Đã thanh toán';
+							break;
+					} 
+					echo $stt ;?>
+				</span>
+				
 			</td>
 			<td>
 				<div class="product_values">

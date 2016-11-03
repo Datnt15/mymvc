@@ -21,6 +21,8 @@ class Cart extends Controller
 
     private function load_header($title = 'Hồ sơ cá nhân'){
         $user = $this->user->get_current_user();
+        $user['number_cart'] = $this->model->get_cart_of( $this->user->get_id() );
+        $user['number_order'] = $this->model->get_order_of( $this->user->get_id() );
         $user['title'] = $title;
         $this->load_view('header', $user);
     }
@@ -47,7 +49,7 @@ class Cart extends Controller
     }
 
     public function index(){
-        $this->load_header("Giỏ hàng");
+       
         if (!empty($message)) { ?>
             <div class="alert alert-success" style="margin: 20px;">
                 <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
@@ -95,6 +97,7 @@ class Cart extends Controller
             $this->model->delete_cart( array('cid' => $this->input->post('cid') ) );
         }
         $cart = $this->model->get_cart_of( $this->user->get_id() );
+        $this->load_header("Giỏ hàng");
         $this->load_view('cart', $cart);
         $this->load_footer();
     }
@@ -175,7 +178,7 @@ class Cart extends Controller
     }
 
     public function orders(){
-        $this->load_header("Quản lý đơn hàng");
+        
         $uid = $this->user->get_id();
         if( isset( $_POST['note'] ) ){
             $cat_items = explode(',',$this->input->post('cat_items'));
@@ -195,14 +198,14 @@ class Cart extends Controller
                 );
             }
         }
-
+        $this->load_header("Quản lý đơn hàng");
         $this->load_view('order',$this->model->get_order_of( $uid ));
         $this->load_footer();
     }
 
 
 	public function update_user_info(){
-        $this->load_header();
+        
 		if( isset($_POST) ){
 			
 			$data = array(
@@ -270,11 +273,30 @@ class Cart extends Controller
                 
             }
         }
+        $this->load_header();
         $this->load_footer();
 	}
 
     private function load_footer(){
         $this->load_view('footer');
+    }
+
+    public function search(){
+        if (isset($_POST['key'])) {
+            // echo $this->input->post('key');
+            $data = $this->model->search( $this->input->post('key'), $this->user->get_id() );
+            if (!empty($data)) {
+                if (isset($data[0]['oid'])) {
+                    $this->load_view('order', $data);
+                }
+                else{
+                    $this->load_view('cart-result', $data);
+                }
+            }
+            else {
+                echo "<h1>Không tìm thấy kết quả nào phù hợp với <b>" . $this->input->post('key') . "</b></h1>";
+            }
+        }
     }
 }
 

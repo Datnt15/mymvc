@@ -1,5 +1,5 @@
  $(document).ready(function () {
- 	$('.edit-cart').on('click', function() {
+ 	$("#content").on('click','.edit-cart', function() {
  		var edit_button = $(this);
 		$('#edit-table div.form-group').each(function() {
 			$(this).addClass('hidden');
@@ -14,7 +14,7 @@
 			$(this).toggleClass('hidden');
 		});
 	});
-	$(".undo").on('click', function() {
+	$("#content").on('click', ".undo", function() {
 		
 		$('#edit-table div.form-group').each(function() {
 			$(this).addClass('hidden');
@@ -24,7 +24,7 @@
 		});
 	});
 
-	$('.save-cart').on('click', function() {
+	$("#content").on('click','.save-cart', function() {
 		
 		var formData = new FormData(), _this = $(this);
 		_this.parent().parent().parent().find('div.form-group').each(function() {
@@ -88,7 +88,10 @@
 		});
 	});
 
-	$('.save-order').on('click', function() {
+	/**
+	 * Saving order content
+	 */
+	$("#content").on('click','.save-order', function() {
 		
 		var formData = new FormData(), _this = $(this);
 		_this.parent().parent().parent().find('div.form-group').each(function() {
@@ -154,6 +157,49 @@
 				});
             }
 		});
+	});
+
+	// Popover data of cart and order
+	$('button[data-toggle=popover]').popover({ 
+	    html : true,
+		trigger: "focus",
+		content: function(e) {
+			console.log();
+			return $($(this).attr('href')).html();
+		}
+	});
+
+	var _content = $("#content").html();
+	$("#cart_search").on('click', function() {
+		if ( $("#search_key").val() !== '') {
+			
+			$.post(
+				$("base").attr('href') + "cart/search", 
+				{
+					key: $("#search_key").val()
+				}, 
+				function( $res ) {
+	                $("#content").html($res);
+					initAutoComplete();
+	                return false;
+				}
+			);
+			return false;
+		}
+		else{
+			$("#content").html(_content);
+			initAutoComplete();
+			alert("Vui lòng nhập từ bạn muốn tìm!");
+			$("#search_key").focus();
+		}
+
+	});
+
+	$("#search_key").on('change', function(event) {
+		if ( $("#search_key").val() == '') {
+			$("#content").html(_content);
+			initAutoComplete();
+		}
 	});
 });
 

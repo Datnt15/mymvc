@@ -1,8 +1,5 @@
 <table class="table table-striped">
 	<thead>
-		<th>
-			<input type="checkbox" id="check_all">
-		</th>
 		<th>Ảnh</th>
 		<th width="200">Tên sản phẩm</th>
 		<th width="150">Người nhận</th>
@@ -15,9 +12,6 @@
 		<?php $carts = $this->data; 
 		foreach ($carts as $cart): ?>
 		<tr>
-			<td>
-				<input type="checkbox" name="cid[]" value="<?= $cart['cid']; ?>" />
-			</td>
 			<td>
 				<img class="" src="<?= $cart['img']; ?>" alt="<?= $cart['name']; ?>" width="100" height="100">
 				<div class="form-group hidden">
@@ -105,48 +99,3 @@
 
 </table>
 
-<form action="<?= BASE_URL;?>cart/orders" method="POST" id="send_order_form">
-	<input type="hidden" name="cat_items">
-	<!-- Textarea -->
-	<div class="form-group">
-	  	
-	  	<div class="col-md-8">                     
-	    	<textarea class="form-control" name="note">Ghi chú cho đơn hàng</textarea>
-	  	</div>
-		<div class="col-md-4">
-			<button class="btn btn-primary" id="send_order">
-				Gửi đơn hàng
-			</button>
-		</div>
-	</div>
-
-</form>
-
-
-<script>
-	jQuery(document).ready(function($) {
-		jQuery("#check_all").click( function(){
-		   	if( jQuery(this).is(':checked') ) 
-		   		jQuery('input[name="cid[]"]').not(this).prop('checked', this.checked);
-		   	else{
-		   		jQuery('input[name="cid[]"]').not(this).click();
-		   	}
-		});
-		jQuery("#send_order").on('click', function() {
-			var checkedValues = $('input[name="cid[]"]:checked').map(function() {
-			    return this.value;
-			}).get();
-
-			if(checkedValues == ''){
-				alert("Vui lòng chọn ít nhất một sản phẩm!");
-				return false;
-			}else {
-
-				jQuery("#send_order_form input[name='cat_items']").val( checkedValues );
-				
-				jQuery("#send_order_form").submit();
-			}
-		});
-
-	});
-</script>

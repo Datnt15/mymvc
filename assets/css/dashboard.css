@@ -383,13 +383,25 @@ h2 {
   padding-top: 7px;
   float: left;
 }
-.noti a{
+.noti a,
+.noti button{
   position: relative;
   color: #aeaeae;
   padding: 0 10px;
   font-size: 20px;
+  background-color: transparent;
+  -webkit-outline: none;
+     -moz-outline: none;
+       -o-outline: none;
+          outline: none;
+          
+  -webkit-border: none;
+     -moz-border: none;
+       -o-border: none;
+          border: none;
 }
-.noti a span{
+.noti a span,
+.noti button span{
     font-size: 12px;
     display: block;
     position: absolute;

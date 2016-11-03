@@ -104,6 +104,38 @@ class Cart_model extends Model
     }
 
 
+    /**
+     * Get number items in cart of specifix user
+     * @param  [int] $uid [user ID]
+     * @return [int]      [number of records]
+     */
+    public function get_number_items_in_cart_of($uid){
+        $count = $this->db->query("SELECT count(*) FROM `" . $this->cart . "` where `stt`='pending' and `uid`='".$uid."';");
+        return intval( $count[0]['count(*)'] );
+    }
+
+
+
+    /**
+     * Get number items in order table of specifix user
+     * @param  [int] $uid [user ID]
+     * @return [int]      [number of records]
+     */
+    public function get_number_items_in_order_of($uid){
+        $count = $this->db->query("SELECT count(*) FROM `" . $this->order . "` where `uid`='".$uid."';");
+        return intval( $count[0]['count(*)'] );
+    }
+
+
+    public function search($key, $uid){
+        $res = $this->db->query("SELECT * FROM `cart` JOIN `order` ON (Concat(`cart`.`name`, `cart`.`url`, `cart`.`customer`,`cart`.`address`,`cart`.`date_create`,`order`.`date_create`) like '%" . $key ."%' AND `order`.`cid`=`cart`.`cid`) WHERE `cart`.`uid`=" . $uid . ";");
+        if (empty($res)) {
+            $res = $this->db->query("SELECT * FROM `cart` WHERE Concat(`name`, `url`, `customer`,`address`,`date_create`) like '%" . $key ."%' AND `uid`=" . $uid . ";");
+        }
+        return $res;
+    }
+
+
 
 }
 ?>
