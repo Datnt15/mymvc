@@ -1,6 +1,16 @@
 <?php  
 $orders = $this->data;
 
+function currencyConverter($from_Currency ,$amount , $to_Currency = 'VND') {
+	$from_Currency = urlencode($from_Currency);
+	$to_Currency = urlencode($to_Currency);
+	$encode_amount = 1;
+	$get = file_get_contents("https://www.google.com/finance/converter?a=$encode_amount&from=$from_Currency&to=$to_Currency");
+	$get = explode("<span class=bld>",$get);
+	$get = explode("</span>",$get[1]);
+	$converted_currency = preg_replace("/[^0-9\.]/", null, $get[0]);
+	return intval($converted_currency * intval($amount));
+}
 ?>
 <h1>Đơn hàng</h1>
 <table class="table">
@@ -10,7 +20,7 @@ $orders = $this->data;
 		<th width="100">Người nhận</th>
 		<th width="120">Số điện thoại</th>
 		<th width="150">Địa chỉ</th>
-		<th>Chú thích</th>
+		<th>Giá lẻ</th>
 		<th>Số lượng</th>
 		<th>Trạng thái</th>
 		<th width="120">Hành động</th>
@@ -67,12 +77,9 @@ $orders = $this->data;
 				</div>
 			</td>
 			<td>
-				<span class="product_values">
-					<?= $order['note']; ?>
+				<span>
+					<?= number_format( currencyConverter($order['currency'], $order['price']), 0, ',', ' '); ?> VND 
 				</span>
-				<div class="form-group hidden">
-					<input type="text" name="note" class="form-control" value="<?= $order['note']; ?>">
-				</div>
 			</td>
 			<td>
 				<span class="product_values">
@@ -83,39 +90,47 @@ $orders = $this->data;
 				</div>				
 			</td>
 			<td>
-				<span">
-					<?php
-					$stt = ''; 
+				<span>
+				<?php
+					
 					/**
 					 * Có các trạng thái của đơn hàng là
 					 * pending: Đang đợi nhân viên bán hàng duyệt và báo giá
-					 * confirm: Đã duyệt và báo giá, chờ đặt cọc
 					 * milestoned: Đã đặt cọc.
 					 * shipping: Đang chuyển hàng
 					 * paid: đã thanh toán và hoàn tất đơn hàng
 					 */
 					switch ($order['status']) {
 						case 'pending':
-							$stt = 'Đang đợi duyệt';
-							break;
-
-						case 'confirm':
-							$stt = 'Đang đợi đặt cọc';
+						// Nếu là đơn hàng thêm từ addon thì sẽ hiển thị nút đặt cọc
+							if ($order['is_add_on']) {?>
+							<form action="" method="POST">
+								<input type="hidden" name="oid" value="<?= $order['oid']; ?>">
+								<button class="btn btn-info make_milestone" name="make_milestone" data-toggle="tooltip" data-placement="bottom" title="Đặt cọc 30% của <?= number_format( currencyConverter($order['currency'], $order['price']) * intval($order['quantity']), 0, ',', ' '); ?> VND là <?= number_format( currencyConverter($order['currency'], $order['price']) * intval($order['quantity']) * 0.3, 0, ',', ' '); ?> VND">
+									<i class="fa fa-credit-card" aria-hidden="true"></i> Đặt cọc
+								</button>
+							</form>
+							<?php }
+							// Ngược lại thì hiển thị thông báo đang đợi duyệt từ admin
+							else{
+								echo 'Đang đợi duyệt';
+								
+							}
 							break;
 
 						case 'milestoned':
-							$stt = 'Đã đặt cọc';
+							echo 'Đã đặt cọc';
 							break;
 						
 						case 'shipping':
-							$stt = 'Đang chuyển hàng';
+							echo 'Đang chuyển hàng';
 							break;
 
 						case 'paid':
-							$stt = 'Đã thanh toán';
+							echo 'Đã thanh toán';
 							break;
 					} 
-					echo $stt ;?>
+				?>
 				</span>
 				
 			</td>
@@ -149,3 +164,4 @@ $orders = $this->data;
 	</tbody>
 
 </table>
+

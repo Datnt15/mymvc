@@ -1,8 +1,8 @@
 <?php 
 /**
-* Author: Le Van Thong
+* Author: Nguyen Tien Dat
 */
-class Cart_model extends Model
+class Manager_model extends Model
 {
 	private $cart        = 'cart';
     private $order       = 'order';

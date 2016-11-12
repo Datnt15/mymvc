@@ -30,31 +30,25 @@
 		</div>
 	  	<ul>
 		    <li class="<?= ($page == 'profile') ? 'active' : NULL ?>">
-		    	<a href="<?= BASE_URL;?>cart/profile">
+		    	<a href="<?= BASE_URL;?>manager/profile">
 		    		<i class="fa fa-home" aria-hidden="true"></i>
 		    		<span>Hồ sơ</span>
 		    	</a>
 		    </li>
-		    <li class="<?= ($page == 'add_product') ? 'active' : NULL ?>">
-		    	<a href="<?= BASE_URL;?>cart/add_product">
-			    	<i class="fa fa-cart-plus" aria-hidden="true"></i>
-			    	<span class="swatch light-grey">Thêm sản phẩm</span>
+		    <li class="<?= ($page == 'add_on' || $page == '' || $page == 'manager' ) ? 'active' : NULL ?>">
+		    	<a href="<?= BASE_URL;?>manager/add_on">
+			    	<i class="fa fa-rocket" aria-hidden="true"></i>
+			    	<span class="swatch light-grey">Add on</span>
 		    	</a>
 	    	</li>
-		    <li class="<?= ($page == 'cart' || $page == '') ? 'active' : NULL ?>">
-		    	<a href="<?= BASE_URL;?>cart">
-		    		<i class="fa fa-shopping-basket" aria-hidden="true"></i>
-		    		<span>Giỏ hàng</span>
-		    	</a>
-		    </li>
 		    <li class="<?= ($page == 'orders') ? 'active' : NULL ?>">
-		    	<a href="<?= BASE_URL;?>cart/orders">
+		    	<a href="<?= BASE_URL;?>manager/orders">
 		    		<i class="fa fa-list-alt" aria-hidden="true"></i>
 		    		<span>Đơn hàng</span>
 	    		</a>
 			</li>
 		    <li class="<?= ($page == 'history') ? 'active' : NULL ?>">
-		    	<a href="<?= BASE_URL;?>cart/history">
+		    	<a href="<?= BASE_URL;?>manager/history">
 		    		<i class="fa fa-rss" aria-hidden="true"></i>
 		    		<span>Lịch sử</span>
 		    	</a>
@@ -65,9 +59,6 @@
 		<!-- Header -->
 		<header>
 		  	<div class="noti">
-		  		<a href="">
-		  			<i class="fa fa-user" aria-hidden="true"></i>
-		  		</a>
 		  		<a href="">
 		  			<i class="fa fa-commenting-o" aria-hidden="true"></i>
 		  		</a>
@@ -82,7 +73,7 @@
 	  				</span>
 		  		</button>
 		  		<button class="popover-button" href="#order-popover" data-toggle="popover" data-placement="bottom">
-		  			<i class="fa fa-list-alt" aria-hidden="true"></i>
+		  			<i class="fa fa-rocket" aria-hidden="true"></i>
 		  			<span class="new-noti">
 		  				<?= count($this->data['number_order']);?>
 	  				</span>

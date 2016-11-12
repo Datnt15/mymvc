@@ -15,9 +15,9 @@
  # --- WARNING! --- if you set defaults - it's recommended to set $ACCESS_PWD to protect your db!
  
  $DBDEF=array(
- 'user'=>"i2910768_wp1",#required
- 'pwd'=>"Q#3dRM(ys9fPpxj9iF(43#]8", #required
- 'db'=>"i2910768_wp1",  #optional, default DB
+ 'user'=>"nhaphangsieutoc",#required
+ 'pwd'=>"nhaphangsieutoc", #required
+ 'db'=>"nhaphangsieutoc",  #optional, default DB
  'host'=>"localhost",#optional
  'port'=>"",#optional
  'chset'=>"utf8",#optional, default charset

@@ -160,7 +160,7 @@
 	});
 
 	// Popover data of cart and order
-	$('button[data-toggle=popover]').popover({ 
+	$('.popover-button').popover({ 
 	    html : true,
 		trigger: "focus",
 		content: function(e) {
@@ -168,6 +168,10 @@
 			return $($(this).attr('href')).html();
 		}
 	});
+
+	// Tooltip data
+	$('.make_milestone').tooltip();
+
 
 	var _content = $("#content").html();
 	$("#cart_search").on('click', function() {

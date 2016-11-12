@@ -8,6 +8,7 @@ class Cart extends Controller
     function __construct() {
 
         parent::__construct(__CLASS__);
+        $this->model = $this->load_model();
         
     }
 
@@ -19,7 +20,6 @@ class Cart extends Controller
             echo "Vui lòng kiểm tra email để kích hoạt tài khoản của bạn và quay lại sau!";
             die;
         }
-        $this->model = $this->load_model();
         
     }
 
@@ -101,12 +101,12 @@ class Cart extends Controller
             $this->model->delete_cart( array('cid' => $this->input->post('cid') ) );
         }
         $uid = $this->user->get_id();
-        $addon_token = $this->cookie->get('addon_token');
-        if ($addon_token !== '' && $addon_token !== NULL) {
-            $this->model->update_cart( 
-                array( 'uid' => $uid ), 
-                array( 'uid' => $addon_token ) );
-        }
+        // $addon_token = $this->cookie->get('addon_token');
+        // if ($addon_token !== '' && $addon_token !== NULL) {
+        //     $this->model->update_cart( 
+        //         array( 'uid' => $uid ), 
+        //         array( 'uid' => $addon_token ) );
+        // }
         $this->load_header("Giỏ hàng");
         $this->load_view('cart', $this->model->get_cart_of( $uid ) );
         $this->load_footer();
@@ -139,36 +139,47 @@ class Cart extends Controller
 
             $uid = $this->user->get_id();
             if($uid == 0){
-                $addon_token = $this->cookie->get('addon_token');
-                if ($addon_token == '' || $addon_token == NULL) {
-                    $addon_token = md5( uniqid( time() ) );
-                    $this->cookie->set( 'addon_token', $addon_token );
-                }
-                $uid = $addon_token;
+                echo "not_logged_in";
             }
-            $item = array(
-                'url'           => $this->input->post('item_url'),
-                'name'          => $this->input->post('item_name'),
-                'img'           => $this->input->post('item_image'),
-                'uid'           => $uid,
-                'price'         => $this->input->post('item_price'),
-                'size'          => $this->input->post('item_color_size'),
-                'quantity'      => $this->input->post('quantity'),
-                'currency'      => $this->input->post('currency'),
-                'is_add_on'     => $this->input->post('is_addon'),
-                'type'          => $this->input->post('type'),
-                'seller_id'     => $this->input->post('seller_id'),
-                'seller_name'   => $this->input->post('seller_name'),
-                'note'          => $this->input->post('note'),
-                'shipcharge'    => $this->input->post('shipcharge')
-                );
-            // print_r($item); 
-            $cid = $this->model->add_to_cart($item);
+            else {
+                $item = array(
+                    'url'           => $this->input->post('item_url'),
+                    'name'          => $this->input->post('item_name'),
+                    'img'           => $this->input->post('item_image'),
+                    'uid'           => $uid,
+                    'customer'      => $this->user->get_username(),
+                    'phone'         => $this->user->get_phone(),
+                    'address'       => $this->user->get_address(),
+                    'price'         => $this->input->post('item_price'),
+                    'size'          => $this->input->post('item_color_size'),
+                    'quantity'      => $this->input->post('quantity'),
+                    'currency'      => $this->input->post('currency'),
+                    'is_add_on'     => $this->input->post('is_addon'),
+                    'type'          => $this->input->post('type'),
+                    'seller_id'     => $this->input->post('seller_id'),
+                    'seller_name'   => $this->input->post('seller_name'),
+                    'note'          => $this->input->post('note'),
+                    'shipcharge'    => $this->input->post('shipcharge')
+                    );
+                // Lấy thông tin số dư tài khoản của người dùng
+                $balance = intval($this->user->get_balance());
 
-            if ( $cid ) {
-                echo 'Thêm sản phẩm thành công';
-            }else {
-                echo "Thêm sản phẩm thất bại";
+                // Tính khoản tiền cần đặt cọc
+                $milestone = intval($this->convert_currency($item['currency'], $item['price']) * 0.3 * intval( $item['quantity'] ));
+
+                if ($balance < $milestone) {
+                    echo "balance_not_enought";
+                }
+                else {
+                    
+                    $cid = $this->model->add_to_cart($item);
+
+                    if ( $cid ) {
+                        echo 'success';
+                    }else {
+                        echo "failured";
+                    }
+                }
             }
         }
     }
@@ -261,19 +272,97 @@ class Cart extends Controller
 
             }
         }
+        // Xóa đơn hàng
         if( isset( $_POST['delete'] ) ){
+            // Kiểm tra đơn hàng tồn tại hay không;
+            $order = $this->model->get_order( $this->input->post('oid') );
+            $order = $order[0];
+            // Lấy số dư tài khoản của người dùng
+            $balance = intval($this->user->get_balance());
+
+            // Tính khoản tiền đã đặt cọc
+            $milestone = intval($this->convert_currency($order['currency'], $order['price']) * 0.3 * intval( $order['quantity'] ));
+            // Nếu xóa thành công
             if ( $this->model->delete_order( array( 'oid' => $this->input->post('oid') ) ) ){
+                // Cập nhật lại trạng thái của sản phẩm
                 $this->model->update_cart( 
                     array( 'stt' => 'pending'), 
                     array( 'cid' => $this->input->post('cid') ) 
                 );
+                // Bù lại tiền đã đặt cọc vào tài khoản
+                $this->user->update_user_info(
+                    array('balance' => $balance + $milestone),
+                    $this->user->get_id()
+                );
+                // Xóa giao dịch
+                $this->model->delete_transaction(  array( 'oid' => $this->input->post('oid') ) );
             }
         }
 
-
         $this->load_header("Quản lý đơn hàng");
+
+        // Tạo giao dịch đặt cọc 
+        if( isset( $_POST['make_milestone'] ) ){
+            // Lấy thông tin đơn hàng
+            $order = $this->model->get_order( $this->input->post('oid') );
+            $order = $order[0];
+
+            // Lấy thông tin số dư tài khoản của người dùng
+            $balance = intval($this->user->get_balance());
+
+            // Tính khoản tiền cần đặt cọc
+            $milestone = intval($this->convert_currency($order['currency'], $order['price']) * 0.3 * intval( $order['quantity'] ));
+
+            // Nếu số dư nhỏ hơn tiền đặt cọc
+            if ($balance < $milestone) {?>
+                <div class="alert alert-danger" style="margin: 20px;">
+                    <span class="close" data-dismiss="alert" aria-label="close">&times;</span>
+                    Tài khoản của bạn không đủ số dư để đặt cọc. Vui lòng nạp thêm tiền vào tài khoản
+                </div>
+            <?php }
+            // Có thể đặt cọc
+            else {
+
+                $data = array(
+                    'uid' => $this->user->get_id(),
+                    'oid' => $this->input->post('oid'),
+                    'quantity' => $milestone
+                );
+                
+                // Tạo mới giao dịch
+                if ($this->model->add_transaction($data)) {
+                    
+                    // Cập nhật trạng thái đơn hàng
+                    $this->model->update_order( 
+                        array( 'status' => 'milestoned'), 
+                        array( 'oid' => $this->input->post('oid') ) 
+                    );
+                    // Cập nhật thông tin tài khoản người dùng
+                    $this->user->update_user_info(
+                        array('balance' => $balance - $milestone),
+                        $this->user->get_id()
+                    );
+                }
+            }
+            
+        }
         $this->load_view('order', $this->model->get_order_of( $uid ) );
         $this->load_footer();
+    }
+
+
+    /**
+     * Đổi từ tiền khác sang VND 
+     * @param  [string] $currency [loại tiền] => CNY
+     * @param  [int] $amount   [số lượng] => 200
+     * @return [int]  [quy đổi tương ứng] 200 * 3.300 (VND/CNY)
+     */
+    private function convert_currency($currency, $amount){
+        $get = file_get_contents("https://www.google.com/finance/converter?a=1&from=" . urlencode($currency) . "&to=" . urlencode('VND') );
+        $get = explode("<span class=bld>",$get);
+        $get = explode("</span>",$get[1]);
+
+        return intval( preg_replace("/[^0-9\.]/", null, $get[0]) * intval($amount) );
     }
 
 

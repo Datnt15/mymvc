@@ -10,8 +10,10 @@ class User
 	private $username;
 	private $avatar;
 	private $email;
-	private $fullname;
+	private $phone;
+	private $address;
 	private $role;
+	private $balance;
 	private $stt;
 	private $cookie;
     private $session;
@@ -28,10 +30,12 @@ class User
         	$this->uid 		= $user_data['uid'];
         	$this->username = $user_data['username'];
         	$this->email 	= $user_data['email'];
-        	$this->fullname = $user_data['fullname'];
+        	$this->phone 	= $user_data['phone'];
+        	$this->address 	= $user_data['address'];
         	$this->avatar 	= $user_data['avatar'];
         	$this->role 	= $user_data['role'];
         	$this->stt 		= $user_data['stt'];
+        	$this->balance 	= $user_data['balance'];
         }
 
         else{
@@ -42,6 +46,8 @@ class User
         	$this->fullname = NULL;
         	$this->avatar 	= NULL;
         	$this->role 	= NULL;
+        	$this->stt 		= NULL;
+        	$this->balance 	= 0;
         }
     }
     /**
@@ -235,8 +241,18 @@ class User
 	 * [get_fullname Lay fullname cua user hien tai]
 	 * @return int [user fullname]
 	 */
-	public function get_fullname(){
-		return $this->fullname;
+	public function get_phone(){
+		return $this->phone;
+	}
+
+
+
+	/**
+	 * [get_fullname Lay fullname cua user hien tai]
+	 * @return int [user fullname]
+	 */
+	public function get_address(){
+		return $this->address;
 	}
 
 
@@ -254,6 +270,14 @@ class User
 	 */
 	public function get_role(){
 		return $this->role;
+	}
+
+	/**
+	 * [get_balance Lấy số dư tài khoản của user]
+	 * @return int [số dư tài khoản]
+	 */
+	public function get_balance(){
+		return intval($this->balance);
 	}
 
 	/**
